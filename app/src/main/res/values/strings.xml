@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Pets Online</string>
+    <string name="txtregistration">Registration</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="john_smith">John Smith</string>
+</resources>
