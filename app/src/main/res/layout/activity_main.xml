@@ -50,7 +50,7 @@ tools:context=".MainActivity">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
@@ -87,7 +87,7 @@ tools:context=".MainActivity">
                                 android:layout_width="140dp"
                                 android:layout_height="140dp"
                                 android:background="@color/white"
-                                android:src="@drawable/pet1"
+                                android:src="@drawable/cats"
                                 app:civ_border_color="#FFF"
                                 app:civ_border_width="2dp" />
 
@@ -97,7 +97,7 @@ tools:context=".MainActivity">
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="20dp"
                                 android:gravity="center"
-                                android:text="Pet A"
+                                android:text="Cats"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
 
@@ -139,7 +139,7 @@ tools:context=".MainActivity">
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="20dp"
                                 android:gravity="center"
-                                android:text="Pet B"
+                                android:text="Dogs"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
 
@@ -181,7 +181,7 @@ tools:context=".MainActivity">
                                 android:layout_width="140dp"
                                 android:layout_height="140dp"
                                 android:background="@color/white"
-                                android:src="@drawable/pet4"
+                                android:src="@drawable/hen"
                                 app:civ_border_color="#FFF"
                                 app:civ_border_width="2dp" />
 
@@ -191,7 +191,7 @@ tools:context=".MainActivity">
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="20dp"
                                 android:gravity="center"
-                                android:text="Pet C"
+                                android:text="Hens"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
 
@@ -222,7 +222,7 @@ tools:context=".MainActivity">
                                 android:layout_width="140dp"
                                 android:layout_height="140dp"
                                 android:background="@color/white"
-                                android:src="@drawable/pet2"
+                                android:src="@drawable/rabit"
                                 app:civ_border_color="#FFF"
                                 app:civ_border_width="2dp" />
 
@@ -232,7 +232,7 @@ tools:context=".MainActivity">
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="20dp"
                                 android:gravity="center"
-                                android:text="Pet D"
+                                android:text="Rabbits"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
 
@@ -277,7 +277,7 @@ tools:context=".MainActivity">
                                 android:layout_width="140dp"
                                 android:layout_height="140dp"
                                 android:background="@color/white"
-                                android:src="@drawable/pet3"
+                                android:src="@drawable/goat"
                                 app:civ_border_color="#FFF"
                                 app:civ_border_width="2dp" />
 
@@ -287,7 +287,7 @@ tools:context=".MainActivity">
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:gravity="center"
-                                android:text="Pet E"
+                                android:text="Goat"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
 
@@ -321,7 +321,7 @@ tools:context=".MainActivity">
                                 android:layout_width="140dp"
                                 android:layout_height="140dp"
                                 android:background="@color/white"
-                                android:src="@drawable/pet1"
+                                android:src="@drawable/parrots"
                                 app:civ_border_color="#FFF"
                                 app:civ_border_width="2dp" />
 
@@ -331,7 +331,7 @@ tools:context=".MainActivity">
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="20dp"
                                 android:gravity="center"
-                                android:text="Pet F"
+                                android:text="Parrots"
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
 

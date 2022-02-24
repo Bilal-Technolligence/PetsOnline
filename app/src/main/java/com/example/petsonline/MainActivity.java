@@ -16,7 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends BaseActivity {
-    CardView chat;
+    CardView chat,cats;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,13 +27,12 @@ public class MainActivity extends BaseActivity {
         DatabaseReference databaseReference = firebaseDatabase.getReference();
 
         String uid = "DWBonAfwdTViiAYTxZgHMrx46j43";
-        chat= (CardView) findViewById(R.id.cardA);
+        cats= (CardView) findViewById(R.id.cardA);
 
-        chat.setOnClickListener(new View.OnClickListener() {
+        cats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent o = new Intent(MainActivity.this, Chat.class);
-                o.putExtra("chaterId", uid);
+                Intent o = new Intent(MainActivity.this, CatsActivity.class);
                 startActivity(o);
             }
         });

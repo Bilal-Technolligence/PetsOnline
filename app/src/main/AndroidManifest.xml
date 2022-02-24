@@ -10,35 +10,37 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetsOnline">
         <activity
+            android:name=".AddDetail"
+            android:exported="false" />
+        <activity
+            android:name=".CatsActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashScreen"
-            android:theme="@style/AppMaterialTheme"
-            android:exported="true" >
-
+            android:exported="true"
+            android:theme="@style/AppMaterialTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/AppMaterialTheme"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppMaterialTheme" />
         <activity
             android:name=".RegisterActivity"
-            android:theme="@style/AppMaterialTheme"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".CompleteProfile"/>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppMaterialTheme" />
+        <activity android:name=".CompleteProfile" />
         <activity android:name=".ChatList" />
-            <activity android:name=".Chat"
-                android:theme="@style/AppMaterialTheme"/>
-
+        <activity
+            android:name=".Chat"
+            android:theme="@style/AppMaterialTheme" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>
