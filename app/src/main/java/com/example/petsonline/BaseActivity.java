@@ -31,9 +31,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
    public String abc;
     ActionBarDrawerToggle drawerToggle;
     DatabaseReference dref= FirebaseDatabase.getInstance().getReference();
-    public int logout=0;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser() ;
     String uid = user.getUid();
+    public int logout=0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

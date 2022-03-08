@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -31,6 +32,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.io.IOException;
 
 public class CompleteProfile extends AppCompatActivity {
@@ -167,20 +169,31 @@ public class CompleteProfile extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==requestCode&&resultCode==resultCode
-                &&data!=null && data.getData()!=null){
 
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M){
+          //  final Uri data = intent.getData();
+           // final File file = new File(data.getPath());
+            // now you can upload your image file
             filepath=data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),filepath);
-                pimage.setImageBitmap(bitmap);
+        } else {
+            if (requestCode==requestCode&&resultCode==resultCode
+                    &&data!=null && data.getData()!=null){
+
+                filepath=data.getData();
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),filepath);
+                    pimage.setImageBitmap(bitmap);
 
 
-            } catch (IOException e) {
-                e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
-
         }
+
+
+
     }
     @Override
     public void onBackPressed() {
