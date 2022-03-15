@@ -8,17 +8,62 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:943610629027:android:d8c23d7b72b1206c5e6816",
+        "mobilesdk_app_id": "1:943610629027:android:15bd7feed65c183b5e6816",
         "android_client_info": {
-          "package_name": "com.example.petsonline"
+          "package_name": "com.admin.petsonline"
         }
       },
       "oauth_client": [
         {
-          "client_id": "943610629027-skcv0pboq2o9lbd2bgnfb20grisvu2uc.apps.googleusercontent.com",
+          "client_id": "943610629027-07ojg7pg4kajdd4m20q89choaf8vo3nk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.petsonline",
+            "package_name": "com.admin.petsonline",
+            "certificate_hash": "1d9add2b9fc4dcdbb934d6df738f1043269c3f94"
+          }
+        },
+        {
+          "client_id": "943610629027-1alu5766p2smhiscfdloe6272ttdltgo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgrd7BYJgbc0g2FHrJtthEZiDzrLft-KU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "943610629027-1alu5766p2smhiscfdloe6272ttdltgo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943610629027:android:eed85cb1f9f23d965e6816",
+        "android_client_info": {
+          "package_name": "com.petsonline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "943610629027-eui7kpejnrsq277vmorb9e9vaio1ckgs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.petsonline",
+            "certificate_hash": "1d9add2b9fc4dcdbb934d6df738f1043269c3f94"
+          }
+        },
+        {
+          "client_id": "943610629027-i7uihj5vsqqffnrvqqlp4oak32vvi1er.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.petsonline",
             "certificate_hash": "222390b0a87b155f0258f5731dc7e8fc667781d6"
           }
         },

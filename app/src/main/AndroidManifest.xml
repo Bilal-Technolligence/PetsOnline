@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.petsonline">
+    package="com.petsonline">
 
     <application
         android:allowBackup="true"
@@ -10,36 +10,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetsOnline">
         <activity
-            android:name=".AddDetail"
+            android:name="com.petsonline.AddDetail"
             android:exported="false" />
         <activity
-            android:name=".CatsActivity"
+            android:name="com.petsonline.CatsActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashScreen"
+            android:name="com.petsonline.SplashScreen"
             android:exported="true"
-            android:theme="@style/AppMaterialTheme">
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="com.petsonline.LoginActivity"
+            android:parentActivityName="com.petsonline.MainActivity"
             android:theme="@style/AppMaterialTheme" />
         <activity
-            android:name=".RegisterActivity"
-            android:parentActivityName=".MainActivity"
+            android:name="com.petsonline.RegisterActivity"
+            android:parentActivityName="com.petsonline.MainActivity"
             android:theme="@style/AppMaterialTheme" />
-        <activity android:name=".CompleteProfile" />
-        <activity android:name=".ChatList" />
+        <activity android:name="com.petsonline.CompleteProfile" />
+        <activity android:name="com.petsonline.ChatList" />
         <activity
-            android:name=".Chat"
+            android:name="com.petsonline.Chat"
             android:theme="@style/AppMaterialTheme" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.petsonline.MainActivity"
             android:exported="true" />
     </application>
 
