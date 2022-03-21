@@ -1,4 +1,4 @@
-package com.petsonline;
+package com.petsonline.activites;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,7 +44,7 @@ public class AddDetail extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     eName = dataSnapshot.child( "name" ).getValue().toString();
-                    name.setText(String.valueOf( eName ));
+                    name.setText(eName);
                     if(dataSnapshot.child( "imageurl" ).getValue().toString().equals( " " )) {
 //                        Picasso.get().load( dataSnapshot.child( "imageurl" ).getValue().toString() ).into( imageView );
                     }

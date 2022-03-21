@@ -1,4 +1,4 @@
-    package com.petsonline;
+    package com.petsonline.activites;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.petsonline.adapters.ChatAdapter;
+import com.petsonline.models.MessageAttr;
 import com.petsonline.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

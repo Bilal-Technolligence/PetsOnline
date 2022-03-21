@@ -1,6 +1,6 @@
-package com.petsonline;
+package com.petsonline.models;
 
-class profiledata {
+public class profiledata {
 
     String ID;
     private String NAME;

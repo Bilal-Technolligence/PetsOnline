@@ -1,4 +1,4 @@
-package com.petsonline;
+package com.petsonline.activites;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -6,13 +6,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.petsonline.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.petsonline.adapters.ChatListAdapter;
+import com.petsonline.R;
+import com.petsonline.models.UserAttr;
 
 import java.util.ArrayList;
 import java.util.HashSet;

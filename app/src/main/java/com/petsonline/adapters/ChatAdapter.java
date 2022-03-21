@@ -1,4 +1,4 @@
-package com.petsonline;
+package com.petsonline.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,16 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.petsonline.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.petsonline.R;
+import com.petsonline.models.MessageAttr;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
-    ArrayList<MessageAttr> messageAttrs=new ArrayList<>();
+    ArrayList<MessageAttr> messageAttrs;
     Context context;
     Activity activity;
-    String userId= FirebaseAuth.getInstance().getCurrentUser().getUid();
+    String userId= Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+
     public ChatAdapter(ArrayList<MessageAttr> messageAttrs, Context context, Activity activity) {
         this.activity=activity;
         this.context=context;
@@ -31,7 +34,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.messages_items, parent, false);
-        return new ChatAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -60,7 +63,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
                     holder.receiverMessage.setBackground(ResourcesCompat.getDrawable(context.getResources(),R.drawable.button_round,context.getTheme()));
                     holder.receiverMessage.setText(messageAttrs.get(position).getMessage());
                 }
-        }catch(Exception e){
+        }catch(Exception ignored){
 
         }
     }
@@ -70,7 +73,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         return messageAttrs.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView date,receiverMessage,senderMessage;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

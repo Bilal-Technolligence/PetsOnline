@@ -1,14 +1,13 @@
-package com.petsonline;
+package com.petsonline.activites;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 
 import com.petsonline.R;
+import com.petsonline.activites.LoginActivity;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashScreen extends AppCompatActivity {

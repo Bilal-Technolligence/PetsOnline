@@ -1,4 +1,4 @@
-package com.petsonline;
+package com.petsonline.activites;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,10 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.petsonline.R;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +24,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.petsonline.R;
+import com.petsonline.services.FirbaseAuthenticationClass;
 
 public class LoginActivity extends AppCompatActivity {
     View login;
@@ -40,15 +38,21 @@ public class LoginActivity extends AppCompatActivity {
 
     DatabaseReference dref= FirebaseDatabase.getInstance().getReference();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_login);
 
-//        getSupportActionBar().setTitle("LogIn");
-      //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setTitle("LogIn");
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (FirebaseAuth.getInstance().getCurrentUser() != null)
+        {
+            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+            finish();
+            return;
+        }
 
         pd=new ProgressDialog(this);
         pd.setMessage("Logging In..... ");
@@ -80,7 +84,6 @@ public class LoginActivity extends AppCompatActivity {
             }else {
                 progressDialog.show();
                 firbaseAuthenticationClass.LoginUser(EMAIL,PASSWORD, LoginActivity.this, progressDialog);
-
             }
         });
 

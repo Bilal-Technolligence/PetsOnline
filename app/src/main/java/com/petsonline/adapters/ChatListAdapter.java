@@ -1,4 +1,4 @@
-package com.petsonline;
+package com.petsonline.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,12 +13,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.petsonline.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.petsonline.R;
+import com.petsonline.models.UserAttr;
+import com.petsonline.activites.Chat;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

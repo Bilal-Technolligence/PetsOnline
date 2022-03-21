@@ -1,4 +1,4 @@
-package com.petsonline;
+package com.petsonline.activites;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -30,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.petsonline.models.profiledata;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.petsonline;
+package com.petsonline.models;
 
 public class UserAttr {
     String Id;
