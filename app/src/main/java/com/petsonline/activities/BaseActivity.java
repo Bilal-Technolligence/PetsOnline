@@ -1,4 +1,4 @@
-package com.petsonline.activites;
+package com.petsonline.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,19 +43,18 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         super.onCreate(savedInstanceState);
         setContentView(getContentViewId());
 
-
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawarLayout);
+        drawerLayout = findViewById(R.id.drawarLayout);
 
         Intent in = getIntent();
         userName = in.getStringExtra("name");
+
         //adding drawar button
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
         //navbar item click
 
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
+        NavigationView navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
         // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -111,7 +110,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         switch (menuItem.getItemId()) {
 
             case R.id.home: {
-
                 Intent in = new Intent(this, MainActivity.class);
                 startActivity(in);
                 finish();
@@ -119,16 +117,16 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
             }
 
             case R.id.profile: {
-                Intent in = new Intent(this, MainActivity.class);
-                startActivity(in);
-                finish();
+                //Intent in = new Intent(this, MainActivity.class);
+                //startActivity(in);
+                //finish();
 
                 break;
             }
             case R.id.history: {
-                Intent in = new Intent(this, ChatList.class);
-                startActivity(in);
-                finish();
+                //Intent in = new Intent(this, ChatList.class);
+                //startActivity(in);
+                //finish();
                 break;
 
             }
@@ -136,6 +134,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
             case R.id.logout: {
 
                 if (uid != null) {
+                    FirebaseAuth.getInstance().signOut();
                     startActivity(new Intent(this, LoginActivity.class));
                     finish();
                     break;

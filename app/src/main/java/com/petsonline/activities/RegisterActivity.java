@@ -1,4 +1,4 @@
-package com.petsonline.activites;
+package com.petsonline.activities;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -10,18 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetsOnline">
         <activity
-            android:name=".activites.SpecificAdsActivity"
+            android:name=".activities.CreateNewAdActivity"
             android:exported="false" />
         <activity
-            android:name=".activites.AddDetail"
+            android:name=".activities.SpecificAdsActivity"
             android:exported="false" />
         <activity
-            android:name=".activites.CatsActivity"
+            android:name=".activities.AddDetail"
             android:exported="false" />
         <activity
-            android:name=".activites.SplashScreen"
+            android:name=".activities.CatsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SplashScreen"
             android:exported="true"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/AppMaterialTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,20 +32,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activites.LoginActivity"
-            android:parentActivityName=".activites.MainActivity"
+            android:name=".activities.LoginActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppMaterialTheme" />
         <activity
-            android:name=".activites.RegisterActivity"
-            android:parentActivityName=".activites.MainActivity"
+            android:name=".activities.RegisterActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppMaterialTheme" />
-        <activity android:name=".activites.CompleteProfile" />
-        <activity android:name=".activites.ChatList" />
+        <activity android:name=".activities.CompleteProfile" />
+        <activity android:name=".activities.ChatList" />
         <activity
-            android:name=".activites.Chat"
+            android:name=".activities.Chat"
             android:theme="@style/AppMaterialTheme" />
         <activity
-            android:name=".activites.MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true" />
     </application>
 

@@ -11,8 +11,11 @@ public class AdDetail {
     String Ad_Title;
     String Ad_Address;
     String SellerID;
+    String Date;
 
-    public AdDetail(String ad_ID, String ad_Category_FID, String ad_Img, String ad_Price, String ad_Quantity, String ad_Sold, String ad_Desc, String ad_Title, String ad_Address, String sellerID) {
+    public AdDetail(){}
+
+    public AdDetail(String ad_ID, String ad_Category_FID, String ad_Img, String ad_Price, String ad_Quantity, String ad_Sold, String ad_Desc, String ad_Title, String ad_Address, String sellerID, String date) {
         Ad_ID = ad_ID;
         Ad_Category_FID = ad_Category_FID;
         Ad_Img = ad_Img;
@@ -23,6 +26,15 @@ public class AdDetail {
         Ad_Title = ad_Title;
         Ad_Address = ad_Address;
         SellerID = sellerID;
+        Date = date;
+    }
+
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String date) {
+        Date = date;
     }
 
     public String getSellerID() {

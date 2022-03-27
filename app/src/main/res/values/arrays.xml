@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categories">
+        <item>Select Category</item>
+        <item>Cats</item>
+        <item>Dogs</item>
+        <item>Hens</item>
+        <item>Rabbits</item>
+        <item>Goats</item>
+        <item>Parrots</item>
+    </string-array>
+</resources>

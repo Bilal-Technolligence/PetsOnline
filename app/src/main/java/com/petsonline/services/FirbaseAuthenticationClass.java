@@ -18,7 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.petsonline.activites.MainActivity;
+import com.petsonline.activities.MainActivity;
 
 public class FirbaseAuthenticationClass extends AppCompatActivity {
 

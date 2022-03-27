@@ -5,26 +5,21 @@
     android:id="@+id/drawarLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.petsonline.activites.MainActivity">
+    tools:context="com.petsonline.activities.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/trendingRecyclerView"/>
-
         <LinearLayout
             android:id="@+id/topLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/trendingRecyclerView"
             android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
             android:layout_marginEnd="0dp"
             android:orientation="vertical"
             android:paddingBottom="?actionBarSize"
@@ -64,10 +59,68 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:gravity="center_horizontal"
                     android:orientation="vertical"
-                    android:paddingBottom="90dp">
+                    android:paddingBottom="48dp">
+
+                    <LinearLayout
+                        android:id="@+id/lyTrending"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Trending"
+                            android:textStyle="bold"
+                            android:textColor="@color/blue"
+                            android:textSize="18dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="10dp"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/trendingRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="5dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" />
+
+                        <LinearLayout
+                            android:layout_marginTop="5dp"
+                            android:id="@+id/no_Trending_ads_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp"
+                                android:src="@drawable/no_data_found"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="No Trending Ads Found"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Categories"
+                        android:textStyle="bold"
+                        android:textColor="@color/blue"
+                        android:textSize="18dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -299,7 +352,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="10dp"
                                     android:gravity="center"
-                                    android:text="Goat"
+                                    android:text="Goats"
                                     android:textColor="@color/black"
                                     android:textStyle="bold" />
 
@@ -360,11 +413,16 @@
         </LinearLayout>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
             tools:context=".MainActivity">
 
             <com.google.android.material.bottomappbar.BottomAppBar
@@ -381,13 +439,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="16dp"
+                    app:labelVisibilityMode="labeled"
                     android:background="@android:color/transparent"
                     app:menu="@menu/bottom_navigation_bar" />
 
             </com.google.android.material.bottomappbar.BottomAppBar>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab"
+                android:id="@+id/add_new_ad_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/app_name"

@@ -30,6 +30,8 @@ public class TrendingRecyclerViewAdapter extends RecyclerView.Adapter<TrendingRe
 
     @Override
     public int getItemCount() {
+        if (AdsList == null)
+            return 0;
         return AdsList.size();
     }
 

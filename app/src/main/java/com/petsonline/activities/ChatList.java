@@ -1,4 +1,4 @@
-package com.petsonline.activites;
+package com.petsonline.activities;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;

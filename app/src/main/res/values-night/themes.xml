@@ -14,12 +14,4 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="SplashTheme" parent="Theme.Design.NoActionBar">
-        <item name="android:windowBackground">
-            @drawable/splash_screen_design
-        </item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowFullscreen">true</item>
-
-    </style>
 </resources>

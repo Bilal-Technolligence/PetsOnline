@@ -1,4 +1,4 @@
-package com.petsonline.activites;
+package com.petsonline.activities;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;

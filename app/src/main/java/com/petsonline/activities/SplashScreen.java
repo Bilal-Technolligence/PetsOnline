@@ -1,13 +1,14 @@
-package com.petsonline.activites;
+package com.petsonline.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.petsonline.R;
-import com.petsonline.activites.LoginActivity;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashScreen extends AppCompatActivity {
@@ -16,9 +17,11 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getWindow().setStatusBarColor(Color.WHITE);
         setContentView(R.layout.activity_splash_screen);
-
-        startActivity(new Intent(this, LoginActivity.class));
-        finish();
+        new Handler().postDelayed(() -> {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        }, 4000);
     }
 }

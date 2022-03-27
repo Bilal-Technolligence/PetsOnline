@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.petsonline.R;
 import com.petsonline.models.UserAttr;
-import com.petsonline.activites.Chat;
+import com.petsonline.activities.Chat;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
