@@ -39,6 +39,7 @@ public class AddDetail extends AppCompatActivity {
     TextView SellerName;
     ImageView image;
     Button btnChat, btnBuyProduct;
+    AdDetail adDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,7 @@ public class AddDetail extends AppCompatActivity {
         setContentView(R.layout.activity_add_detail);
         getSupportActionBar().setTitle("Ad Detail");
 
-        AdDetail adDetail = (AdDetail) getIntent().getSerializableExtra("Ad");
+        adDetail = (AdDetail) getIntent().getSerializableExtra("Ad");
 
         image = findViewById(R.id.image);
         txtPrice = findViewById(R.id.price);
@@ -126,6 +127,7 @@ public class AddDetail extends AppCompatActivity {
             public void onClick(View view) {
                 Intent o = new Intent(AddDetail.this, Chat.class);
                 o.putExtra("chaterId", sellerID);
+                o.putExtra("Ad_ID", adDetail.getAd_ID());
                 startActivity(o);
             }
         });

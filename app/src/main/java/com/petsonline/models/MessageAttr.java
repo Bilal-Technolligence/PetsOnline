@@ -2,10 +2,21 @@ package com.petsonline.models;
 
 public class MessageAttr {
     String id;
-    String recieverId;
-    String senderId;
+    String ReceiverId;
+    String SenderId;
     String message;
     String date;
+
+    public MessageAttr() {
+    }
+
+    public MessageAttr(String id, String receiverId, String senderId, String message, String date) {
+        this.id = id;
+        ReceiverId = receiverId;
+        SenderId = senderId;
+        this.message = message;
+        this.date = date;
+    }
 
     public String getId() {
         return id;
@@ -15,20 +26,20 @@ public class MessageAttr {
         this.id = id;
     }
 
-    public String getRecieverId() {
-        return recieverId;
+    public String getReceiverId() {
+        return ReceiverId;
     }
 
-    public void setRecieverId(String recieverId) {
-        this.recieverId = recieverId;
+    public void setReceiverId(String receiverId) {
+        ReceiverId = receiverId;
     }
 
     public String getSenderId() {
-        return senderId;
+        return SenderId;
     }
 
     public void setSenderId(String senderId) {
-        this.senderId = senderId;
+        SenderId = senderId;
     }
 
     public String getMessage() {
@@ -44,17 +55,6 @@ public class MessageAttr {
     }
 
     public void setDate(String date) {
-        this.date = date;
-    }
-
-    public MessageAttr() {
-    }
-
-    public MessageAttr(String id, String recieverId, String senderId, String message, String date) {
-        this.id = id;
-        this.recieverId = recieverId;
-        this.senderId = senderId;
-        this.message = message;
         this.date = date;
     }
 }
