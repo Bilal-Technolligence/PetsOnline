@@ -110,11 +110,12 @@ public class Chat extends AppCompatActivity {
 
             }
         });
+
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try{
-                    if(!editText.getText().toString().equals(null)) {
+                    if(editText.getText() != null) {
 
                         // Chatid
                         //         userid1

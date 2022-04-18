@@ -1,8 +1,6 @@
 package com.petsonline.adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,17 +12,10 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.petsonline.R;
-import com.petsonline.activities.AddDetail;
-import com.petsonline.models.AdDetail;
 import com.petsonline.models.CareTaker;
 import com.squareup.picasso.Picasso;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 public class CareTakerListAdaptor extends RecyclerView.Adapter<CareTakerListAdaptor.MyHolder> {
     Context ct;
@@ -40,7 +31,7 @@ public class CareTakerListAdaptor extends RecyclerView.Adapter<CareTakerListAdap
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //Toast.makeText(ct , "Inside Adapter" , Toast.LENGTH_SHORT).show();
         LayoutInflater li = LayoutInflater.from(ct);
-        View v = li.inflate(R.layout.trending_recyclerview_item, parent, false);
+        View v = li.inflate(R.layout.care_taker_recyclerview_item, parent, false);
         return new MyHolder(v);
     }
 
@@ -48,32 +39,37 @@ public class CareTakerListAdaptor extends RecyclerView.Adapter<CareTakerListAdap
     public void onBindViewHolder(CareTakerListAdaptor.MyHolder holder, final int position) {
         final CareTaker p1 = al.get(position);
 
-        /*holder.Price.setText("Price : " + p1.getAd_Price());
-        holder.Title.setText("Title : " + p1.getAd_Title());
-        holder.Description.setText("Description : " + p1.getAd_Desc());
-        holder.Category.setText("Category : " + p1.getAd_Category_FID());
-        holder.Address.setText("Address : " + p1.getAd_Address());
-
-        DateFormat originalFormat = new SimpleDateFormat("ddMMyyyy HHmmss", Locale.getDefault());
-        @SuppressLint("SimpleDateFormat")
-        DateFormat targetFormat = new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
-        Date date;
-        try {
-            date = originalFormat.parse(p1.getDate());
-            assert date != null;
-            String formattedDate = targetFormat.format(date);
-            holder.Date.setText(formattedDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        if (p1.getAd_Img() != null)
-            Picasso.get().load(p1.getAd_Img()).into(holder.Image);
+        if (p1.getNAME()!=null && !p1.getNAME().equals(""))
+            holder.name.setText("Name : " + p1.getNAME());
         else
-            holder.Image.setImageResource(R.drawable.profile);
+            holder.name.setVisibility(View.GONE);
 
-        holder.cld.setOnClickListener(view -> ct.startActivity(new Intent(ct, AddDetail.class).putExtra("Ad", p1)));
-*/
+        if (p1.getADDRESS()!=null && !p1.getADDRESS().equals(""))
+            holder.address.setText("Address : " + p1.getADDRESS());
+        else
+            holder.address.setVisibility(View.GONE);
+
+        if (p1.getFEEPERDAY()!=null && !p1.getFEEPERDAY().equals(""))
+            holder.chargesperday.setText("Charges Per day : " + p1.getFEEPERDAY());
+        else
+            holder.chargesperday.setVisibility(View.GONE);
+
+        if (p1.getFEEPERHOUR()!=null && !p1.getFEEPERHOUR().equals(""))
+            holder.chargesperhour.setText("Charges Per hour : " + p1.getFEEPERHOUR());
+        else
+            holder.chargesperhour.setVisibility(View.GONE);
+
+        if (p1.getSTARTINGTIME()!=null && !p1.getSTARTINGTIME().equals("") && p1.getENDINGTIME()!=null && !p1.getENDINGTIME().equals(""))
+            holder.opening_hours.setText( p1.getSTARTINGTIME().concat(" - ").concat(p1.getENDINGTIME()));
+        else
+            holder.opening_hours.setVisibility(View.GONE);
+
+        if (p1.getIMAGEURL() != null)
+            Picasso.get().load(p1.getIMAGEURL()).into(holder.image);
+        else
+            holder.image.setImageResource(R.drawable.profile);
+
+        //holder.cld.setOnClickListener(view -> ct.startActivity(new Intent(ct, AddDetail.class).putExtra("Ad", p1)));
     }
 
     @Override
@@ -82,25 +78,23 @@ public class CareTakerListAdaptor extends RecyclerView.Adapter<CareTakerListAdap
     }
 
     public static class MyHolder extends RecyclerView.ViewHolder {
-        ImageView Image;
-        TextView Price;
-        TextView Title;
-        TextView Description;
-        TextView Category;
-        TextView Address;
-        TextView Date;
+        ImageView image;
+        TextView name;
+        TextView opening_hours;
+        TextView chargesperday;
+        TextView chargesperhour;
+        TextView address;
         CardView cld;
 
         public MyHolder(View itemView) {
             super(itemView);
-            cld = itemView.findViewById(R.id.AdDetailCard);
-            Image = itemView.findViewById(R.id.image);
-            Price = itemView.findViewById(R.id.price);
-            Title = itemView.findViewById(R.id.title);
-            Description = itemView.findViewById(R.id.description);
-            Category = itemView.findViewById(R.id.category);
-            Address = itemView.findViewById(R.id.address);
-            Date = itemView.findViewById(R.id.date);
+            cld = itemView.findViewById(R.id.CareTakerDetailCard);
+            image = itemView.findViewById(R.id.image);
+            name = itemView.findViewById(R.id.mName);
+            opening_hours = itemView.findViewById(R.id.opening_hours);
+            chargesperday = itemView.findViewById(R.id.chargesperday);
+            chargesperhour = itemView.findViewById(R.id.chargesperhour);
+            address = itemView.findViewById(R.id.address);
         }
     }
 }

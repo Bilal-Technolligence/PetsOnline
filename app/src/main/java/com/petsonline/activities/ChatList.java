@@ -27,6 +27,7 @@ public class ChatList extends BaseActivity {
 
     ArrayList<String> chaterId=new ArrayList<>();
     ArrayList<UserAttr> userAttrs=new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

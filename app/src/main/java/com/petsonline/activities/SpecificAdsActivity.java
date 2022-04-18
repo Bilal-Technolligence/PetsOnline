@@ -24,6 +24,8 @@ import com.petsonline.adapters.AdsListAdaptor;
 import com.petsonline.models.AdDetail;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
 
 public class SpecificAdsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
@@ -123,12 +125,11 @@ public class SpecificAdsActivity extends AppCompatActivity implements AdapterVie
         al = new ArrayList<>();
         p = new AdDetail();
 
-        loadPage();
+        //loadPage();
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        Toast.makeText(this, " ad " + spinnerSubCategory.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
         if (spinnerSubCategory.getSelectedItem().toString().equals("Select*"))
             loadPage();
         else
@@ -165,6 +166,7 @@ public class SpecificAdsActivity extends AppCompatActivity implements AdapterVie
 
                     }
                     if (!al.isEmpty()) {
+                        Collections.reverse(al);
                         NoRecordFoundView.setVisibility(View.GONE);
                         rv.setVisibility(View.VISIBLE);
                         md = new AdsListAdaptor(SpecificAdsActivity.this, al);
@@ -188,7 +190,6 @@ public class SpecificAdsActivity extends AppCompatActivity implements AdapterVie
 
     private void refresh(String query) {
         al.clear();
-
         FirebaseDatabase.getInstance().getReference().child("Ads").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -221,6 +222,7 @@ public class SpecificAdsActivity extends AppCompatActivity implements AdapterVie
 
                     }
                     if (!al.isEmpty()) {
+                        Collections.reverse(al);
                         NoRecordFoundView.setVisibility(View.GONE);
                         rv.setVisibility(View.VISIBLE);
                         md = new AdsListAdaptor(SpecificAdsActivity.this, al);

@@ -9,7 +9,6 @@ public class CareTaker implements Serializable {
     public String ADDRESS;
     public String DOB;
     public String Age;
-    public String VECHILENO;
     public String IMAGEURL;
     public String PROFILECOMPLETED;
     public String ROLE;
@@ -22,14 +21,13 @@ public class CareTaker implements Serializable {
 
     public CareTaker(){}
 
-    public CareTaker(String ID, String NAME, String MOBILE, String ADDRESS, String DOB, String age, String VECHILENO, String IMAGEURL, String PROFILECOMPLETED, String ROLE, String FEEPERDAY, String AVAILABLESTATUS, String STARTINGTIME, String ENDINGTIME, String FEEPERHOUR, String EMAIL) {
+    public CareTaker(String ID, String NAME, String MOBILE, String ADDRESS, String DOB, String age, String IMAGEURL, String PROFILECOMPLETED, String ROLE, String FEEPERDAY, String AVAILABLESTATUS, String STARTINGTIME, String ENDINGTIME, String FEEPERHOUR, String EMAIL) {
         this.ID = ID;
         this.NAME = NAME;
         this.MOBILE = MOBILE;
         this.ADDRESS = ADDRESS;
         this.DOB = DOB;
         Age = age;
-        this.VECHILENO = VECHILENO;
         this.IMAGEURL = IMAGEURL;
         this.PROFILECOMPLETED = PROFILECOMPLETED;
         this.ROLE = ROLE;
@@ -87,14 +85,6 @@ public class CareTaker implements Serializable {
 
     public void setAge(String age) {
         Age = age;
-    }
-
-    public String getVECHILENO() {
-        return VECHILENO;
-    }
-
-    public void setVECHILENO(String VECHILENO) {
-        this.VECHILENO = VECHILENO;
     }
 
     public String getIMAGEURL() {
