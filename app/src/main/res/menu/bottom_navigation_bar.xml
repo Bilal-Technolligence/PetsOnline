@@ -16,13 +16,13 @@
         android:title="" />
 
     <item
-        android:id="@+id/Profile"
-        android:icon="@drawable/ic_person"
-        android:title="Profile" />
+        android:id="@+id/ads"
+        android:icon="@drawable/ic_ads"
+        android:title="Ads" />
 
     <item
-        android:id="@+id/Settings"
-        android:icon="@drawable/ic_settings"
-        android:title="Settings" />
+        android:id="@+id/chats"
+        android:icon="@drawable/ic_chats"
+        android:title="Chats" />
 
 </menu>

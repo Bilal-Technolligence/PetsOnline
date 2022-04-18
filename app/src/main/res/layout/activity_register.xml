@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,178 +10,183 @@
     android:paddingEnd="10dp"
     tools:context="com.petsonline.activities.RegisterActivity">
 
-
-    <TextView
-        android:id="@+id/tregister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/txtregistration"
-        android:textColor="@color/Green"
-        android:textSize="34sp" />
-
-    <EditText
-        android:id="@+id/reguname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="Username"
-        android:textColorHint="@color/black"
-        android:textSize="18sp"
-        android:backgroundTint="@color/Green"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:layout_marginTop="35dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_height="wrap_content"
-        android:text="UserName must be without any space"></TextView>
-
-    <EditText
-        android:id="@+id/regmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="E-Mail"
-        android:textColorHint="@color/black"
-        android:backgroundTint="@color/Green"
-        android:textSize="18sp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:layout_marginTop="35dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"/>
-
-    <EditText
-        android:id="@+id/regpass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="Password"
-        android:textColorHint="@color/black"
-        android:backgroundTint="@color/Green"
-        android:textSize="18sp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:layout_marginTop="35dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_height="wrap_content"
-        android:text="Password must contain 6 numbers"></TextView>
-
-    <EditText
-        android:id="@+id/regconcpass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="Confirm Pssword"
-        android:textColorHint="@color/black"
-        android:backgroundTint="@color/Green"
-        android:textSize="18sp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:layout_marginTop="35dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginEnd="20dp"
-        android:gravity="center"
-        android:layout_marginStart="20dp"
-        android:weightSum="2">
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textColor="@color/black"
-            android:layout_gravity="center"
-            android:textAlignment="center"
+            android:id="@+id/tregister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/txtregistration"
+            android:textColor="@color/Green"
+            android:textSize="34sp" />
+
+        <EditText
+            android:id="@+id/reguname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="Username"
+            android:textColorHint="@color/black"
             android:textSize="18sp"
-            android:text="Sign Up as "/>
+            android:backgroundTint="@color/Green"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_height="wrap_content"
+            android:text="UserName must be without any space"/>
 
-        <Spinner
-            android:id="@+id/spinner_loginAs"
-            android:layout_width="0dp"
-            android:layout_gravity="center"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+        <EditText
+            android:id="@+id/regmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="E-Mail"
+            android:textColorHint="@color/black"
+            android:backgroundTint="@color/Green"
+            android:textSize="18sp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"/>
 
-    </LinearLayout>
+        <EditText
+            android:id="@+id/regpass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="Password"
+            android:textColorHint="@color/black"
+            android:backgroundTint="@color/Green"
+            android:textSize="18sp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_height="wrap_content"
+            android:text="Password must contain 6 numbers"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/regconcpass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="Confirm Password"
+            android:textColorHint="@color/black"
+            android:backgroundTint="@color/Green"
+            android:textSize="18sp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center"
+            android:layout_marginStart="20dp"
+            android:weightSum="2">
 
-            <Button
-                android:id="@+id/btncancel"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Cancel"
-                android:textSize="16sp"
-                android:background="@color/Green"
-                android:textColor="@color/white"
-                android:layout_marginLeft="20dp"
-                android:layout_marginStart="20dp" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:text="Sign Up as "/>
 
-            <Button
-                android:id="@+id/btnregister"
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:background="@color/Green"
-                android:text="Register"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+            <Spinner
+                android:id="@+id/spinner_loginAs"
+                android:layout_width="0dp"
+                android:layout_gravity="center"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btncancel"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel"
+                    android:textSize="16sp"
+                    android:background="@color/Green"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp" />
+
+                <Button
+                    android:id="@+id/btnregister"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/Green"
+                    android:text="Register"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/alreadyacc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColorLink="@color/gray"
+            android:text="Already have an account? LogIn Here"
+            android:textColor="@color/Green"
+            android:textSize="18sp"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"/>
+
     </LinearLayout>
 
-
-    <TextView
-        android:id="@+id/alreadyacc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColorLink="@color/gray"
-        android:text="Already have an account? LogIn Here"
-        android:textColor="@color/Green"
-        android:textSize="18sp"
-        android:layout_marginTop="35dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"/>
-
-</androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>

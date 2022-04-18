@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recyclerView"/>
-
+<!--
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
         app:headerLayout="@layout/header"
@@ -19,6 +19,6 @@
         android:layout_height="match_parent"
         app:menu="@menu/drawar_menu"
         app:itemTextColor="#6c6c6c"
-        android:layout_gravity="start"
-        ></com.google.android.material.navigation.NavigationView>
+        android:layout_gravity="start"/>-->
+
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -2,6 +2,7 @@ package com.petsonline.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -30,7 +31,7 @@ public class MainActivity extends BaseActivity implements TrendingRecyclerViewAd
     BottomNavigationView bottomNavigationView;
     private View no_Trending_ads_layout;
     private FloatingActionButton add_new_ad_btn;
-    private TextView gotoCategories,gotoCareTaker,gotoDoctors;
+    private TextView gotoCategories, gotoCareTaker, gotoDoctors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +45,12 @@ public class MainActivity extends BaseActivity implements TrendingRecyclerViewAd
 
     private void initObj() {
         gotoCategories = findViewById(R.id.gotoCategories);
-        gotoCareTaker= findViewById(R.id.gotoCareTaker);
+        gotoCareTaker = findViewById(R.id.gotoCareTaker);
         gotoDoctors = findViewById(R.id.gotoDoctors);
 
-        gotoCategories.setOnClickListener(view -> startActivity(new Intent(MainActivity.this,AllCategoriesActivity.class)));
-        gotoCareTaker.setOnClickListener(view -> startActivity(new Intent(MainActivity.this,AllCareTakersActivity.class)));
-        gotoDoctors.setOnClickListener(view -> startActivity(new Intent(MainActivity.this,AllDoctorsActivity.class)));
+        gotoCategories.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, AllCategoriesActivity.class)));
+        gotoCareTaker.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, AllCareTakersActivity.class)));
+        gotoDoctors.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, AllDoctorsActivity.class)));
 
         no_Trending_ads_layout = findViewById(R.id.no_Trending_ads_layout);
         add_new_ad_btn = findViewById(R.id.add_new_ad_btn);
@@ -57,6 +58,21 @@ public class MainActivity extends BaseActivity implements TrendingRecyclerViewAd
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setBackground(null);
         bottomNavigationView.getMenu().getItem(2).setEnabled(false);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.chats:
+                        startActivity(new Intent(MainActivity.this,ChatList.class));
+                        return true;
+                    case R.id.ads:
+                        startActivity(new Intent(MainActivity.this,AllMyAdsActivity.class));
+                        return true;
+                }
+                return true;
+            }
+        });
 
         trendingRecyclerView = findViewById(R.id.trendingRecyclerView);
 
@@ -70,16 +86,13 @@ public class MainActivity extends BaseActivity implements TrendingRecyclerViewAd
         databaseReference.child("Ads").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists())
-                {
+                if (snapshot.exists()) {
                     trendingRecyclerViewAdapter = new TrendingRecyclerViewAdapter(MainActivity.this, null);
                     trendingRecyclerViewAdapter.setClickListener(MainActivity.this);
                     trendingRecyclerView.setAdapter(trendingRecyclerViewAdapter);
                     //ShowTrending();
                     HideTrending(); // remove this Line to Show Original Trending
-                }
-                else
-                {
+                } else {
                     HideTrending();
                     //Show No Trending Exists
                 }
@@ -99,12 +112,12 @@ public class MainActivity extends BaseActivity implements TrendingRecyclerViewAd
         });
     }
 
-    private void ShowTrending(){
+    private void ShowTrending() {
         no_Trending_ads_layout.setVisibility(View.GONE);
         trendingRecyclerView.setVisibility(View.VISIBLE);
     }
 
-    private void HideTrending(){
+    private void HideTrending() {
         no_Trending_ads_layout.setVisibility(View.VISIBLE);
         trendingRecyclerView.setVisibility(View.GONE);
     }
@@ -114,7 +127,6 @@ public class MainActivity extends BaseActivity implements TrendingRecyclerViewAd
         return R.layout.activity_main;
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -122,9 +134,9 @@ public class MainActivity extends BaseActivity implements TrendingRecyclerViewAd
 
     @Override
     public void onBackPressed() {
-        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder( MainActivity.this );
-        alertDialogBuilder.setTitle( "Exit" ).setMessage( "Are you sure to exit?" )
-                .setNegativeButton( "No", (dialog, which) -> dialog.cancel()).setPositiveButton( "Exit", (dialog, which) -> finish()).show();
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        alertDialogBuilder.setTitle("Exit").setMessage("Are you sure to exit?")
+                .setNegativeButton("No", (dialog, which) -> dialog.cancel()).setPositiveButton("Exit", (dialog, which) -> finish()).show();
     }
 
     @Override

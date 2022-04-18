@@ -1,6 +1,7 @@
 package com.petsonline.activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,7 +22,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class ChatList extends BaseActivity {
+public class ChatList extends AppCompatActivity {
     RecyclerView recyclerView;
     DatabaseReference dref = FirebaseDatabase.getInstance().getReference();
 
@@ -31,7 +32,8 @@ public class ChatList extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_chat_list);
+        setContentView(R.layout.activity_chat_list);
+
         getSupportActionBar().setTitle("Chat List");
         recyclerView=(RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -46,12 +48,12 @@ public class ChatList extends BaseActivity {
                         userAttrs.clear();
                         for(DataSnapshot ds: dataSnapshot.getChildren()) {
                             if (ds.exists()) {
-                                if (ds.child("receiverId").getValue().equals(userId))
+                                if (ds.child("ReceiverId").getValue().equals(userId))
                                 {
-                                    chaterId.add(ds.child("senderId").getValue().toString());
+                                    chaterId.add(ds.child("SenderId").getValue().toString());
                                 }
-                                if(ds.child("senderId").getValue().equals(userId)) {
-                                    chaterId.add(ds.child("receiverId").getValue().toString());
+                                if(ds.child("SenderId").getValue().equals(userId)) {
+                                    chaterId.add(ds.child("ReceiverId").getValue().toString());
                                 }
                             }
                         }
@@ -70,12 +72,6 @@ public class ChatList extends BaseActivity {
         }
         catch (Exception e){
         }
-    }
-
-
-    @Override
-    protected int getContentViewId() {
-        return R.layout.activity_chat_list;
     }
 
     private void showChatList() {
@@ -123,8 +119,6 @@ public class ChatList extends BaseActivity {
 
                 }
             });
-
-
         }
     }
 

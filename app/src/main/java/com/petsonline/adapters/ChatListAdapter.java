@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.petsonline.R;
+import com.petsonline.activities.ChatWithoutAdActivity;
 import com.petsonline.models.UserAttr;
 import com.petsonline.activities.Chat;
 import com.squareup.picasso.Picasso;
@@ -100,7 +101,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(context, Chat.class);
+                Intent i = new Intent(context, ChatWithoutAdActivity.class);
                 i.putExtra("chaterId", id);
                 activity.startActivity(i);
 

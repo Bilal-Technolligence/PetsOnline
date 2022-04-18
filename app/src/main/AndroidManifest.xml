@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetsOnline">
         <activity
+            android:name=".activities.OwnAdDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AllMyAdsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ChatWithoutAdActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.AllChatsCaretakerActivity"
             android:exported="false" />
         <activity

@@ -1,22 +1,16 @@
 package com.petsonline.activities;
 
-import android.content.Context;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.petsonline.adapters.ChatAdapter;
-import com.petsonline.models.MessageAttr;
-import com.petsonline.R;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,6 +18,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.petsonline.R;
+import com.petsonline.adapters.ChatAdapter;
+import com.petsonline.models.MessageAttr;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -31,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class Chat extends AppCompatActivity {
+public class ChatWithoutAdActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     DatabaseReference dref = FirebaseDatabase.getInstance().getReference();
     ArrayList<MessageAttr> messageAttrs = new ArrayList<>();
@@ -46,13 +43,12 @@ public class Chat extends AppCompatActivity {
     boolean ChatExist = false;
     String SellerID;
     String MineID;
-    String AdID;
     String ChatID = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
+        setContentView(R.layout.activity_chat_without_ad);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -66,7 +62,6 @@ public class Chat extends AppCompatActivity {
 
         SellerID = getIntent().getStringExtra("chaterId");
         MineID = user.getUid();
-        AdID = getIntent().getStringExtra("Ad_ID");
 
         editText = (EditText) findViewById(R.id.message);
         SendButton = (ImageView) findViewById(R.id.imgSend);
@@ -106,12 +101,12 @@ public class Chat extends AppCompatActivity {
                 try {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         if (ds.exists()) {
-                            if (ds.child("ReceiverId").getValue().equals(SellerID) && ds.child("SenderId").getValue().equals(MineID) && ds.child("AdID").getValue().equals(AdID)) {
+                            if (ds.child("ReceiverId").getValue().equals(SellerID) && ds.child("SenderId").getValue().equals(MineID)) {
                                 ChatExist = true;
                                 ChatID = ds.getKey();
                                 break;
                             }
-                            if (ds.child("ReceiverId").getValue().equals(MineID) && ds.child("SenderId").getValue().equals(SellerID) && ds.child("AdID").getValue().equals(AdID)) {
+                            if (ds.child("ReceiverId").getValue().equals(MineID) && ds.child("SenderId").getValue().equals(SellerID)) {
                                 ChatExist = true;
                                 ChatID = ds.getKey();
                                 break;
@@ -151,7 +146,7 @@ public class Chat extends AppCompatActivity {
                             }
                         }
                     }
-                    chatAdapter = new ChatAdapter(messageAttrs, Chat.this, Chat.this);
+                    chatAdapter = new ChatAdapter(messageAttrs, ChatWithoutAdActivity.this, ChatWithoutAdActivity.this);
                     recyclerView.setAdapter(chatAdapter);
                 } catch (Exception e) {
                     Log.e("Error ",e.getMessage());
@@ -171,7 +166,6 @@ public class Chat extends AppCompatActivity {
         dref.child("ChatList").child(ChatID).child("ReceiverId").setValue(SellerID);
         dref.child("ChatList").child(ChatID).child("SenderId").setValue(MineID);
         dref.child("ChatList").child(ChatID).child("SenderId").setValue(MineID);
-        dref.child("ChatList").child(ChatID).child("AdID").setValue(AdID);
 
         SendMsg();
     }
