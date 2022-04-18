@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.petsonline.R;
 import com.petsonline.services.FirbaseAuthenticationClass;
+import com.petsonline.util.BaseUtil;
 
 public class LoginActivity extends AppCompatActivity {
     View login;
@@ -46,13 +47,6 @@ public class LoginActivity extends AppCompatActivity {
 
         //getSupportActionBar().setTitle("LogIn");
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        if (FirebaseAuth.getInstance().getCurrentUser() != null)
-        {
-            startActivity(new Intent(LoginActivity.this,MainActivity.class));
-            finish();
-            return;
-        }
 
         pd=new ProgressDialog(this);
         pd.setMessage("Logging In..... ");

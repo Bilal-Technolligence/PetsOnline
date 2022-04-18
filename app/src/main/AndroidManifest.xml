@@ -10,6 +10,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetsOnline">
         <activity
+            android:name=".activities.AllChatsCaretakerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CareTakerMeProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.HandoverPetsToMeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AllDoctorsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AllCareTakersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AllCategoriesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.DoctorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CareTakerActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.CreateNewAdActivity"
             android:exported="false" />
         <activity

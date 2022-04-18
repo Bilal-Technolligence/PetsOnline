@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.petsonline.R;
+import com.petsonline.util.BaseUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
@@ -135,6 +136,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
                 if (uid != null) {
                     FirebaseAuth.getInstance().signOut();
+                    new BaseUtil(BaseActivity.this).ClearPreferences();
                     startActivity(new Intent(this, LoginActivity.class));
                     finish();
                     break;

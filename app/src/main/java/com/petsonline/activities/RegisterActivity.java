@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.petsonline.R;
+import com.petsonline.util.BaseUtil;
 
 public class RegisterActivity extends AppCompatActivity {
     Button btnCancel;
@@ -32,6 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
     String eName;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
+    Spinner spinnerLoginAs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,13 @@ public class RegisterActivity extends AppCompatActivity {
 
        // getSupportActionBar().setTitle("Register");
        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        spinnerLoginAs = (Spinner)findViewById(R.id.spinner_loginAs);
+        ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_dropdown_item,
+                getResources().getStringArray(R.array.LoginAs));
+        spinnerLoginAs.setAdapter(spinnerCountShoesArrayAdapter);
 
         btnCancel= (Button) findViewById(R.id.btncancel);
         btnSignup= (Button) findViewById(R.id.btnregister);
@@ -65,6 +76,8 @@ public class RegisterActivity extends AppCompatActivity {
                     txtPassword.setError("Password length must be more than 6 characters");
                     txtPassword.setFocusable(true);
 
+                }else if (spinnerLoginAs.getSelectedItemPosition() == 0){
+                    Toast.makeText(RegisterActivity.this, "Please select your SignUp Role", Toast.LENGTH_SHORT).show();
                 } else {
 
                     registeruser(email,password);
@@ -123,11 +136,12 @@ public class RegisterActivity extends AppCompatActivity {
                            // String uid=eName;
                             FirebaseDatabase database=FirebaseDatabase.getInstance();
 
-
                             DatabaseReference reference=database.getReference("Users");
 
                             reference.child(uid).child( "Email" ).setValue(Email);
                             reference.child(uid).child( "Password" ).setValue(password);
+                            reference.child(uid).child( "Role" ).setValue(spinnerLoginAs.getSelectedItem().toString());
+                            new BaseUtil(RegisterActivity.this).SetLoginRole(spinnerLoginAs.getSelectedItem().toString());
 //                            reference.child(uid).child( "Password" ).setValue(Password);
                            reference.child(uid).child( "Id" ).setValue(uid);
                             Intent in = new Intent( RegisterActivity.this, CompleteProfile.class );

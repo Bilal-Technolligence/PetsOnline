@@ -4,19 +4,31 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1595" />
+        <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/drawable/ic_walk.xml" value="0.1195" />
         <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/drawable/splash_screen_design.xml" value="0.1395" />
         <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/drawable/white_cursor_color.xml" value="0.1395" />
         <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/layout/activity_add_detail.xml" value="0.20416666666666666" />
+        <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/layout/activity_all_care_takers.xml" value="0.20416666666666666" />
+        <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/layout/activity_all_categories.xml" value="0.19010416666666666" />
+        <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/layout/activity_all_doctors.xml" value="0.20416666666666666" />
+        <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/layout/activity_caker_taker_me_profile.xml" value="0.19010416666666666" />
+        <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/layout/activity_care_taker.xml" value="0.1" />
         <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/layout/activity_cats.xml" value="0.20416666666666666" />
+        <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/layout/activity_chat_list.xml" value="0.20416666666666666" />
+        <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/layout/activity_complete_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/layout/activity_create_new_ad.xml" value="0.20416666666666666" />
+        <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/layout/activity_doctor.xml" value="0.20416666666666666" />
+        <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/layout/activity_handover_pets_to_me.xml" value="0.20416666666666666" />
         <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
         <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/layout/activity_specific_ads.xml" value="0.20416666666666666" />
         <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/layout/activity_splash_screen.xml" value="0.20416666666666666" />
         <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/layout/no_record_layout.xml" value="0.20416666666666666" />
         <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/layout/trending_recyclerview_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/menu/bottom_navigation_bar.xml" value="0.20416666666666666" />
         <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/menu/drawar_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/menu/logout_menu.xml" value="0.1787037037037037" />
         <entry key="..\:/Clients_Projects/PetsOnline/PetsOnline/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/Mehar/AndroidStudioProjects/PetsOnline/app/src/main/res/drawable-v24/backgroundlayout.xml" value="0.1359375" />
         <entry key="..\:/Users/Mehar/AndroidStudioProjects/PetsOnline/app/src/main/res/drawable-v24/ic_baseline_notifications_24.xml" value="0.11510416666666666" />

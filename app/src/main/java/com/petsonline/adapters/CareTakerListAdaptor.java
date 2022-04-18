@@ -3,12 +3,12 @@ package com.petsonline.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,23 +16,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.petsonline.R;
 import com.petsonline.activities.AddDetail;
 import com.petsonline.models.AdDetail;
+import com.petsonline.models.CareTaker;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class AdsListAdaptor extends RecyclerView.Adapter<AdsListAdaptor.MyHolder> {
+public class CareTakerListAdaptor extends RecyclerView.Adapter<CareTakerListAdaptor.MyHolder> {
     Context ct;
-    ArrayList<AdDetail> al;
+    ArrayList<CareTaker> al;
 
-    public AdsListAdaptor(Context cont, ArrayList<AdDetail> al) {
+    public CareTakerListAdaptor(Context cont, ArrayList<CareTaker> al) {
         this.ct = cont;
         this.al = al;
     }
@@ -47,10 +45,10 @@ public class AdsListAdaptor extends RecyclerView.Adapter<AdsListAdaptor.MyHolder
     }
 
     @Override
-    public void onBindViewHolder(AdsListAdaptor.MyHolder holder, final int position) {
-        final AdDetail p1 = al.get(position);
+    public void onBindViewHolder(CareTakerListAdaptor.MyHolder holder, final int position) {
+        final CareTaker p1 = al.get(position);
 
-        holder.Price.setText("Price : " + p1.getAd_Price());
+        /*holder.Price.setText("Price : " + p1.getAd_Price());
         holder.Title.setText("Title : " + p1.getAd_Title());
         holder.Description.setText("Description : " + p1.getAd_Desc());
         holder.Category.setText("Category : " + p1.getAd_Category_FID());
@@ -75,7 +73,7 @@ public class AdsListAdaptor extends RecyclerView.Adapter<AdsListAdaptor.MyHolder
             holder.Image.setImageResource(R.drawable.profile);
 
         holder.cld.setOnClickListener(view -> ct.startActivity(new Intent(ct, AddDetail.class).putExtra("Ad", p1)));
-
+*/
     }
 
     @Override

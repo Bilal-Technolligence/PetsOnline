@@ -49,9 +49,18 @@ public class CreateNewAdActivity extends AppCompatActivity {
     private ImageView image;
     private View SelectImg,SaveAd;
     private EditText edPrice,edTitle,edAddress,edQuantity,edDescription;
-    private Spinner spinnerCategory;
+    private Spinner spinnerCategory,spinnerSubCategory;
     private String Category="";
     private String[] categories;
+    private String[] catsCategories;
+    private String[] dogsCategories;
+    private String[] hensCategories;
+    private String[] rabbitsCategories;
+    private String[] goatsCategories;
+    private String[] parrotsCategories;
+
+    ArrayAdapter<String> spinnerArrayAdapterSubCategory;
+
     private ProgressBar progressBar;
 
     @Override
@@ -73,18 +82,54 @@ public class CreateNewAdActivity extends AppCompatActivity {
         edQuantity = findViewById(R.id.edQuantity);
         edDescription = findViewById(R.id.edDescription);
         spinnerCategory = findViewById(R.id.categorySpinner);
+        spinnerSubCategory = findViewById(R.id.subCategorySpinner);
+
+        catsCategories = getResources().getStringArray(R.array.CatsSubCategory);
+        dogsCategories = getResources().getStringArray(R.array.DogsSubCategory);
+        parrotsCategories = getResources().getStringArray(R.array.ParrotsSubCategory);
+        goatsCategories = getResources().getStringArray(R.array.GoatsSubCategory);
+        hensCategories = getResources().getStringArray(R.array.HensSubCategory);
+        rabbitsCategories = getResources().getStringArray(R.array.RabbitsSubCategory);
 
         categories = getResources().getStringArray(R.array.categories);
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, categories);
-
         spinnerCategory.setAdapter(spinnerArrayAdapter);
         spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0)
                     Category = "";
-                else
+                else {
                     Category = parent.getItemAtPosition(position).toString();
+
+                    switch (position)
+                    {
+                        case 1:
+                            spinnerArrayAdapterSubCategory = new ArrayAdapter<>(CreateNewAdActivity.this, android.R.layout.simple_spinner_dropdown_item, catsCategories);
+                            spinnerSubCategory.setAdapter(spinnerArrayAdapterSubCategory);
+                            break;
+                        case 2:
+                            spinnerArrayAdapterSubCategory = new ArrayAdapter<>(CreateNewAdActivity.this, android.R.layout.simple_spinner_dropdown_item, dogsCategories);
+                            spinnerSubCategory.setAdapter(spinnerArrayAdapterSubCategory);
+                            break;
+                        case 3:
+                            spinnerArrayAdapterSubCategory = new ArrayAdapter<>(CreateNewAdActivity.this, android.R.layout.simple_spinner_dropdown_item, hensCategories);
+                            spinnerSubCategory.setAdapter(spinnerArrayAdapterSubCategory);
+                            break;
+                        case 4:
+                            spinnerArrayAdapterSubCategory = new ArrayAdapter<>(CreateNewAdActivity.this, android.R.layout.simple_spinner_dropdown_item, rabbitsCategories);
+                            spinnerSubCategory.setAdapter(spinnerArrayAdapterSubCategory);
+                            break;
+                        case 5:
+                            spinnerArrayAdapterSubCategory = new ArrayAdapter<>(CreateNewAdActivity.this, android.R.layout.simple_spinner_dropdown_item, goatsCategories);
+                            spinnerSubCategory.setAdapter(spinnerArrayAdapterSubCategory);
+                            break;
+                        case 6:
+                            spinnerArrayAdapterSubCategory = new ArrayAdapter<>(CreateNewAdActivity.this, android.R.layout.simple_spinner_dropdown_item, parrotsCategories);
+                            spinnerSubCategory.setAdapter(spinnerArrayAdapterSubCategory);
+                            break;
+                    }
+                }
             }
 
             @Override
@@ -106,6 +151,11 @@ public class CreateNewAdActivity extends AppCompatActivity {
             if (Category.equals(""))
             {
                 Toast.makeText(this, "No Category Selected, Please Select one...", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (spinnerSubCategory.getSelectedItemPosition() == 0)
+            {
+                Toast.makeText(this, "No Sub-Category Selected, Please Select one...", Toast.LENGTH_SHORT).show();
                 return;
             }
             if (edPrice.getText()==null || edPrice.getText().toString().equals(""))
@@ -215,6 +265,7 @@ public class CreateNewAdActivity extends AppCompatActivity {
                 DateFormat df = new SimpleDateFormat("ddMMyyyy HHmmss", Locale.getDefault());
                 map.put("Date",df.format(Calendar.getInstance().getTime()));
                 map.put("SellerID", FirebaseAuth.getInstance().getUid());
+                map.put("SubCategory",spinnerSubCategory.getSelectedItem().toString());
 
                 firebaseDatabase.child("Ads").child(ID).setValue(map);
                 progressBar.setVisibility(View.GONE);

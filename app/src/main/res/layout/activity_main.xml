@@ -115,297 +115,45 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Categories"
+                        android:text="  What are you looking for ?"
                         android:textStyle="bold"
                         android:textColor="@color/blue"
                         android:textSize="18dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="10dp"/>
 
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/gotoCategories"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:padding="2dp">
+                        android:text="      See Categories"
+                        android:textStyle="bold"
+                        android:textColor="@color/blue"
+                        android:textSize="16dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"/>
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/cardA"
-                            android:layout_width="wrap_content"
-                            android:layout_height="220dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_margin="10dp"
-                            android:layout_weight="1"
-                            app:cardBackgroundColor="@color/white"
-                            app:cardCornerRadius="20dp"
-                            app:cardElevation="10dp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="5dp">
-
-                                <de.hdodenhof.circleimageview.CircleImageView
-                                    android:layout_width="140dp"
-                                    android:layout_height="140dp"
-                                    android:background="@color/white"
-                                    android:src="@drawable/cats"
-                                    app:civ_border_color="#FFF"
-                                    app:civ_border_width="2dp" />
-
-                                <TextView
-                                    android:id="@+id/txtPetA"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="20dp"
-                                    android:gravity="center"
-                                    android:text="Cats"
-                                    android:textColor="@color/black"
-                                    android:textStyle="bold" />
-
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/cardB"
-                            android:layout_width="wrap_content"
-                            android:layout_height="220dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_margin="10dp"
-                            android:layout_weight="1"
-                            app:cardBackgroundColor="@color/white"
-                            app:cardCornerRadius="20dp"
-                            app:cardElevation="10dp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_alignParentLeft="true"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="5dp">
-
-                                <de.hdodenhof.circleimageview.CircleImageView
-                                    android:layout_width="140dp"
-                                    android:layout_height="140dp"
-                                    android:background="@color/white"
-                                    android:src="@drawable/pet3"
-                                    app:civ_border_color="#FFF"
-                                    app:civ_border_width="2dp" />
-
-                                <TextView
-                                    android:id="@+id/txtPetB"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="20dp"
-                                    android:gravity="center"
-                                    android:text="Dogs"
-                                    android:textColor="@color/black"
-                                    android:textStyle="bold" />
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
+                    <TextView
+                        android:id="@+id/gotoCareTaker"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:padding="2dp">
+                        android:text="      See CareTakers"
+                        android:textStyle="bold"
+                        android:textColor="@color/blue"
+                        android:textSize="16dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"/>
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/cardC"
-                            android:layout_width="wrap_content"
-                            android:layout_height="220dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_margin="10dp"
-                            android:layout_weight="1"
-                            app:cardBackgroundColor="@color/white"
-                            app:cardCornerRadius="20dp"
-                            app:cardElevation="10dp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="5dp">
-
-                                <de.hdodenhof.circleimageview.CircleImageView
-                                    android:layout_width="140dp"
-                                    android:layout_height="140dp"
-                                    android:background="@color/white"
-                                    android:src="@drawable/hen"
-                                    app:civ_border_color="#FFF"
-                                    app:civ_border_width="2dp" />
-
-                                <TextView
-                                    android:id="@+id/txtPetC"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="20dp"
-                                    android:gravity="center"
-                                    android:text="Hens"
-                                    android:textColor="@color/black"
-                                    android:textStyle="bold" />
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/cardD"
-                            android:layout_width="wrap_content"
-                            android:layout_height="220dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_margin="10dp"
-                            android:layout_weight="1"
-                            app:cardBackgroundColor="@color/white"
-                            app:cardCornerRadius="20dp"
-                            app:cardElevation="10dp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_alignParentLeft="true"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="5dp">
-
-                                <de.hdodenhof.circleimageview.CircleImageView
-                                    android:layout_width="140dp"
-                                    android:layout_height="140dp"
-                                    android:background="@color/white"
-                                    android:src="@drawable/rabit"
-                                    app:civ_border_color="#FFF"
-                                    app:civ_border_width="2dp" />
-
-                                <TextView
-                                    android:id="@+id/txtPetD"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="20dp"
-                                    android:gravity="center"
-                                    android:text="Rabbits"
-                                    android:textColor="@color/black"
-                                    android:textStyle="bold" />
-
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/buttons1"
+                    <TextView
+                        android:id="@+id/gotoDoctors"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:padding="2dp">
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/cardE"
-                            android:layout_width="wrap_content"
-                            android:layout_height="220dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_margin="10dp"
-                            android:layout_weight="1"
-                            app:cardBackgroundColor="@color/white"
-                            app:cardCornerRadius="20dp"
-                            app:cardElevation="10dp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="5dp">
-
-                                <de.hdodenhof.circleimageview.CircleImageView
-                                    android:layout_width="140dp"
-                                    android:layout_height="140dp"
-                                    android:background="@color/white"
-                                    android:src="@drawable/goat"
-                                    app:civ_border_color="#FFF"
-                                    app:civ_border_width="2dp" />
-
-                                <TextView
-                                    android:id="@+id/txtPetE"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:gravity="center"
-                                    android:text="Goats"
-                                    android:textColor="@color/black"
-                                    android:textStyle="bold" />
-
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/cardF"
-                            android:layout_width="wrap_content"
-                            android:layout_height="220dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_margin="10dp"
-                            android:layout_weight="1"
-                            app:cardBackgroundColor="@color/white"
-                            app:cardCornerRadius="20dp"
-                            app:cardElevation="10dp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_alignParentLeft="true"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:padding="5dp">
-
-                                <de.hdodenhof.circleimageview.CircleImageView
-                                    android:id="@+id/txtPetF"
-                                    android:layout_width="140dp"
-                                    android:layout_height="140dp"
-                                    android:background="@color/white"
-                                    android:src="@drawable/parrots"
-                                    app:civ_border_color="#FFF"
-                                    app:civ_border_width="2dp" />
-
-                                <TextView
-                                    android:id="@+id/txtOpeE"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="20dp"
-                                    android:gravity="center"
-                                    android:text="Parrots"
-                                    android:textColor="@color/black"
-                                    android:textStyle="bold" />
-
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-
-                    </LinearLayout>
+                        android:text="      See Doctors"
+                        android:textStyle="bold"
+                        android:textColor="@color/blue"
+                        android:textSize="16dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"/>
 
                 </LinearLayout>
             </ScrollView>

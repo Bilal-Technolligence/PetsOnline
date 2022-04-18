@@ -10,11 +10,29 @@ public class profiledata {
     private String Age;
     private String VECHILENO;
     private String IMAGEURL;
+    private String PROFILECOMPLETED;
+    private String ROLE;
+
+    public String getROLE() {
+        return ROLE;
+    }
+
+    public void setROLE(String ROLE) {
+        this.ROLE = ROLE;
+    }
+
+    public String getPROFILECOMPLETED() {
+        return PROFILECOMPLETED;
+    }
+
+    public void setPROFILECOMPLETED(String PROFILECOMPLETED) {
+        this.PROFILECOMPLETED = PROFILECOMPLETED;
+    }
 
     public profiledata() {
     }
 
-    public profiledata(String ID, String NAME, String MOBILE, String ADDRESS, String DOB, String age, String VECHILENO, String IMAGEURL) {
+    public profiledata(String ID, String NAME, String MOBILE, String ADDRESS, String DOB, String age, String VECHILENO, String IMAGEURL, String profilecompleted) {
         this.ID = ID;
         this.NAME = NAME;
         this.MOBILE = MOBILE;
@@ -23,6 +41,7 @@ public class profiledata {
         Age = age;
         this.VECHILENO = VECHILENO;
         this.IMAGEURL = IMAGEURL;
+        PROFILECOMPLETED = profilecompleted;
     }
 
     public String getID() {

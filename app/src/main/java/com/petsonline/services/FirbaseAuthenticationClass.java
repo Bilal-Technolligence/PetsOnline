@@ -18,7 +18,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.petsonline.activities.CareTakerActivity;
+import com.petsonline.activities.CompleteProfile;
+import com.petsonline.activities.DoctorActivity;
+import com.petsonline.activities.LoginActivity;
 import com.petsonline.activities.MainActivity;
+import com.petsonline.util.BaseUtil;
 
 public class FirbaseAuthenticationClass extends AppCompatActivity {
 
@@ -39,18 +44,58 @@ public class FirbaseAuthenticationClass extends AppCompatActivity {
                             reference.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    String Role = dataSnapshot.child("Role").getValue(String.class);
+                                    database.getReference("Employee_Profile").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if (snapshot.exists())
+                                            {
+                                                if (!snapshot.child("profilecompleted").exists() || !snapshot.child("profilecompleted").getValue(String.class).equals("true"))
+                                                {
+                                                    activity.startActivity(new Intent(activity, CompleteProfile.class));
+                                                    activity.finish();
+                                                    progressDialog.dismiss();
+                                                    return;
+                                                }
 
-                                    activity.startActivity(new Intent(activity, MainActivity.class));
-                                    activity.finish();
-                                    progressDialog.dismiss();
+                                                new BaseUtil(activity).SetLoggedIn(true);
+                                                new BaseUtil(activity).SetLoginRole(Role);
+
+                                                switch (Role) {
+                                                    case "Buyer/Seller":
+                                                        activity.startActivity(new Intent(activity, MainActivity.class));
+                                                        break;
+                                                    case "Care Taker":
+                                                        activity.startActivity(new Intent(activity, CareTakerActivity.class));
+                                                        break;
+                                                    case "Doctor":
+                                                        activity.startActivity(new Intent(activity, DoctorActivity.class));
+                                                        break;
+                                                    default:
+                                                        activity.startActivity(new Intent(activity, LoginActivity.class));
+                                                        break;
+                                                }
+                                                activity.finish();
+                                                progressDialog.dismiss();
+                                            }else
+                                            {
+                                                activity.startActivity(new Intent(activity, CompleteProfile.class));
+                                                activity.finish();
+                                                progressDialog.dismiss();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
 
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError databaseError) {
                                 }
                             });
-
-
                         }
 
 

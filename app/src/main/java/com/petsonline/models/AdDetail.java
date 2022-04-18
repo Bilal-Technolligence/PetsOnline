@@ -1,6 +1,8 @@
 package com.petsonline.models;
 
-public class AdDetail {
+import java.io.Serializable;
+
+public class AdDetail implements Serializable {
     String Ad_ID;
     String Ad_Category_FID;
     String Ad_Img;

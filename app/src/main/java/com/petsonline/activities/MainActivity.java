@@ -3,6 +3,7 @@ package com.petsonline.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -23,13 +24,13 @@ import com.petsonline.adapters.TrendingRecyclerViewAdapter;
 import java.util.Objects;
 
 public class MainActivity extends BaseActivity implements TrendingRecyclerViewAdapter.ItemClickListener {
-    private CardView cats,dogs,hens,rabbits,goats,parrots;
     private RecyclerView trendingRecyclerView;
     private TrendingRecyclerViewAdapter trendingRecyclerViewAdapter;
     DatabaseReference databaseReference;
     BottomNavigationView bottomNavigationView;
     private View no_Trending_ads_layout;
     private FloatingActionButton add_new_ad_btn;
+    private TextView gotoCategories,gotoCareTaker,gotoDoctors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +43,13 @@ public class MainActivity extends BaseActivity implements TrendingRecyclerViewAd
     }
 
     private void initObj() {
-        cats= findViewById(R.id.cardA);
-        dogs= findViewById(R.id.cardB);
-        hens= findViewById(R.id.cardC);
-        rabbits= findViewById(R.id.cardD);
-        goats= findViewById(R.id.cardE);
-        parrots= findViewById(R.id.cardF);
+        gotoCategories = findViewById(R.id.gotoCategories);
+        gotoCareTaker= findViewById(R.id.gotoCareTaker);
+        gotoDoctors = findViewById(R.id.gotoDoctors);
+
+        gotoCategories.setOnClickListener(view -> startActivity(new Intent(MainActivity.this,AllCategoriesActivity.class)));
+        gotoCareTaker.setOnClickListener(view -> startActivity(new Intent(MainActivity.this,AllCareTakersActivity.class)));
+        gotoDoctors.setOnClickListener(view -> startActivity(new Intent(MainActivity.this,AllDoctorsActivity.class)));
 
         no_Trending_ads_layout = findViewById(R.id.no_Trending_ads_layout);
         add_new_ad_btn = findViewById(R.id.add_new_ad_btn);
@@ -93,42 +95,6 @@ public class MainActivity extends BaseActivity implements TrendingRecyclerViewAd
     private void clickListeners() {
         add_new_ad_btn.setOnClickListener(view -> {
             Intent i = new Intent(MainActivity.this, CreateNewAdActivity.class);
-            startActivity(i);
-        });
-
-        cats.setOnClickListener(view -> {
-            Intent i = new Intent(MainActivity.this, SpecificAdsActivity.class);
-            i.putExtra("category","cats");
-            startActivity(i);
-        });
-
-        dogs.setOnClickListener(view -> {
-            Intent i = new Intent(MainActivity.this, SpecificAdsActivity.class);
-            i.putExtra("category","dogs");
-            startActivity(i);
-        });
-
-        hens.setOnClickListener(view -> {
-            Intent i = new Intent(MainActivity.this, SpecificAdsActivity.class);
-            i.putExtra("category","hens");
-            startActivity(i);
-        });
-
-        rabbits.setOnClickListener(view -> {
-            Intent i = new Intent(MainActivity.this, SpecificAdsActivity.class);
-            i.putExtra("category","rabbits");
-            startActivity(i);
-        });
-
-        goats.setOnClickListener(view -> {
-            Intent i = new Intent(MainActivity.this, SpecificAdsActivity.class);
-            i.putExtra("category","goats");
-            startActivity(i);
-        });
-
-        parrots.setOnClickListener(view -> {
-            Intent i = new Intent(MainActivity.this, SpecificAdsActivity.class);
-            i.putExtra("category","parrots");
             startActivity(i);
         });
     }

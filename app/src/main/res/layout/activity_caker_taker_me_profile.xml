@@ -1,46 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:theme="@style/AppTheme.NoActionBar"
-    tools:context="com.petsonline.activities.CompleteProfile">
-
-    <RelativeLayout
-        android:id="@+id/rellay"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:paddingBottom="20dp"
-        android:background="@color/Green">
-
-        <RelativeLayout
-            android:id="@+id/imguser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            >
-
-            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/pimage"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/upload"
-                app:civ_border_color="#FFF"
-                app:civ_border_width="2dp" />
-
-
-        </RelativeLayout>
-    </RelativeLayout>
+    tools:context=".activities.CareTakerMeProfileActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/rellay"
+        android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:orientation="vertical"
         android:padding="15dp">
@@ -67,19 +35,71 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-
-            >
+            android:layout_marginTop="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/profmobile"
+                android:id="@+id/feeperday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="8dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:hint="Enter Your Mobile Number"
+                android:hint="Enter your Fee Per Day Charges"
+                android:inputType="textPersonName"
+                android:textColorHint="@color/gray" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/feeperhour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="Enter your Fee Per Hour Charges"
+                android:inputType="textPersonName"
+                android:textColorHint="@color/gray" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/availabilitystatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Your Availability"
+                android:textColor="@color/gray"
+                android:textSize="18dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/startingjobtime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="Enter Your Job Starting Time"
                 android:inputType="phone"
                 android:maxLength="11"
                 android:textColorHint="@color/gray" />
@@ -89,9 +109,20 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="10dp">
 
-            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/endingjobtime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="Enter Your Job Closing Time"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:textColorHint="@color/gray" />
 
         </RelativeLayout>
 
@@ -119,20 +150,17 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-
-            >
-
+            android:layout_marginTop="10dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/profage"
+                android:id="@+id/mobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="8dp"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:hint="Enter Your Age"
+                android:hint="Enter Your Mobile Number"
                 android:inputType="number"
                 android:maxLength="2"
 
@@ -143,10 +171,22 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="10dp">
 
-            >
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="Enter Your Email"
+                android:inputType="number"
+                android:maxLength="2"
+
+                android:textColorHint="@color/gray" />
 
         </RelativeLayout>
 
@@ -172,4 +212,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>
