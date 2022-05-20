@@ -114,7 +114,7 @@ public class ChatWithoutAdActivity extends AppCompatActivity {
                         }
                     }
                     if (!ChatExist)
-                        CreateChat();
+                        CreateNewChat();
                     else
                         LoadChat(ChatID);
                 } catch (Exception ignored) {
@@ -158,6 +158,14 @@ public class ChatWithoutAdActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void CreateNewChat() {
+        ChatID = dref.child("ChatList").push().getKey();
+
+        dref.child("ChatList").child(ChatID).child("ReceiverId").setValue(SellerID);
+        dref.child("ChatList").child(ChatID).child("SenderId").setValue(MineID);
+        dref.child("ChatList").child(ChatID).child("SenderId").setValue(MineID);
     }
 
     private void CreateChat() {

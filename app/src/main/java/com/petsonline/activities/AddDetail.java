@@ -34,11 +34,12 @@ import java.util.Locale;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AddDetail extends AppCompatActivity {
-    TextView txtPrice, txtTitle, txtCity, txtDate, txtCategory, txtQuantity, txtDescription,available_quantity;
+    TextView txtPrice, txtTitle, txtCity, txtDate, txtCategory,
+            txtQuantity, txtDescription,available_quantity,subcategory;
     CircleImageView imgProfile;
     TextView SellerName;
     ImageView image;
-    Button btnChat, btnBuyProduct;
+    Button btnChat;
     AdDetail adDetail;
 
     @Override
@@ -60,8 +61,8 @@ public class AddDetail extends AppCompatActivity {
         SellerName = findViewById(R.id.txtName);
         imgProfile = findViewById(R.id.imgProfile);
         btnChat = findViewById(R.id.chat);
-        btnBuyProduct = findViewById(R.id.buyProduct);
         available_quantity = findViewById(R.id.available_quantity);
+        subcategory = findViewById(R.id.subcategory);
 
         if (adDetail.getAd_Img().trim().equals("")) {
             image.setImageResource(R.drawable.logo_png);
@@ -71,13 +72,12 @@ public class AddDetail extends AppCompatActivity {
 
         // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         DatabaseReference dref = FirebaseDatabase.getInstance().getReference();
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        //FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String sellerID = adDetail.getSellerID();
-
         txtPrice.setText("RS " + adDetail.getAd_Price());
         txtTitle.setText("Title " + adDetail.getAd_Title());
         txtCity.setText("Address : " + adDetail.getAd_Address());
-
+        subcategory.setText(adDetail.getAd_SubCategory());
         DateFormat originalFormat = new SimpleDateFormat("ddMMyyyy HHmmss", Locale.getDefault());
         @SuppressLint("SimpleDateFormat")
         DateFormat targetFormat = new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
@@ -106,7 +106,7 @@ public class AddDetail extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    SellerName.setText(dataSnapshot.child("name").getValue().toString() + "");
+                    SellerName.setText(dataSnapshot.child("name").getValue().toString());
                     if (dataSnapshot.child("imageurl").getValue().toString().trim().equals("")) {
                         imgProfile.setImageResource(R.drawable.logo_png);
                     } else {
@@ -122,69 +122,17 @@ public class AddDetail extends AppCompatActivity {
             }
         });
 
-        btnChat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent o = new Intent(AddDetail.this, Chat.class);
-                o.putExtra("chaterId", sellerID);
-                o.putExtra("Ad_ID", adDetail.getAd_ID());
-                startActivity(o);
+        btnChat.setOnClickListener(view -> {
+            if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(sellerID))
+            {
+                Toast.makeText(AddDetail.this, "You can't chat to yourself. This Ad was posted by You.", Toast.LENGTH_LONG).show();
+                return;
             }
+            Intent o = new Intent(AddDetail.this, Chat.class);
+            o.putExtra("chaterId", sellerID);
+            o.putExtra("Ad_ID", adDetail.getAd_ID());
+            startActivity(o);
         });
-
-        btnBuyProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseDatabase.getInstance().getReference().child("Ads").child(adDetail.getAd_ID()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String TotalQuantity = "0";
-                        String SoldQuantity = "0" ;
-
-                        if (snapshot.exists())
-                        {
-                            if (snapshot.child("Quantity").exists())
-                            {
-                                TotalQuantity = snapshot.child("Quantity").getValue(String.class);
-                            }
-                            if (snapshot.child("Sold").exists())
-                            {
-                                SoldQuantity = snapshot.child("Sold").getValue(String.class);
-                            }
-
-                            int total = Integer.parseInt(TotalQuantity);
-                            int sold = Integer.parseInt(SoldQuantity);
-
-                            int remaining = total - sold;
-
-                            if (remaining<=0)
-                            {
-                                Toast.makeText(AddDetail.this, "Sorry, No Available item to sold", Toast.LENGTH_SHORT).show();
-                            }
-                            else{
-                                FirebaseDatabase.getInstance().getReference().child("Ads").child(adDetail.getAd_ID()).child("Sold").setValue((sold+1) + "").addOnCompleteListener(task -> {
-                                    if (task.isSuccessful())
-                                    {
-                                        Toast.makeText(AddDetail.this, "Congrats, your order received. Contact with Seller for more Details", Toast.LENGTH_LONG).show();
-                                    }else{
-                                        Toast.makeText(AddDetail.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        }else
-                        {
-                            Toast.makeText(AddDetail.this, "Unable to get Ad Detail", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-            }
-        });
-
     }
 
 //    @Override

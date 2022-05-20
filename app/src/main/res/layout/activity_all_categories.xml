@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!--
         <LinearLayout
             android:id="@+id/lyTrending"
             android:layout_width="match_parent"
@@ -23,10 +24,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Trending"
+                android:text="Popular Items"
                 android:textStyle="bold"
                 android:textColor="@color/blue"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"/>
 
@@ -53,13 +54,13 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="No Trending Ads Found"
+                    android:text="No Popular Items Found"
                     android:textAlignment="center"/>
 
             </LinearLayout>
 
         </LinearLayout>
-
+-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

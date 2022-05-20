@@ -36,6 +36,7 @@
             android:textSize="18sp"
             android:backgroundTint="@color/Green"
             android:focusable="true"
+            android:maxLength="20"
             android:focusableInTouchMode="true"
             android:layout_marginTop="35dp"
             android:layout_marginLeft="20dp"

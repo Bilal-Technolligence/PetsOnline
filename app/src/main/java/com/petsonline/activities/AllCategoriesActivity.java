@@ -20,9 +20,9 @@ import com.petsonline.adapters.TrendingRecyclerViewAdapter;
 public class AllCategoriesActivity extends AppCompatActivity implements TrendingRecyclerViewAdapter.ItemClickListener {
     private CardView cats,dogs,hens,rabbits,goats,parrots;
     DatabaseReference databaseReference;
-    private View no_Trending_ads_layout;
-    private RecyclerView trendingRecyclerView;
-    private TrendingRecyclerViewAdapter trendingRecyclerViewAdapter;
+    //private View no_Trending_ads_layout;
+    //private RecyclerView trendingRecyclerView;
+    //private TrendingRecyclerViewAdapter trendingRecyclerViewAdapter;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +36,8 @@ public class AllCategoriesActivity extends AppCompatActivity implements Trending
         goats= findViewById(R.id.cardE);
         parrots= findViewById(R.id.cardF);
 
-        no_Trending_ads_layout = findViewById(R.id.no_Trending_ads_layout);
-        trendingRecyclerView = findViewById(R.id.trendingRecyclerView);
+        //no_Trending_ads_layout = findViewById(R.id.no_Trending_ads_layout);
+        //trendingRecyclerView = findViewById(R.id.trendingRecyclerView);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
         cats.setOnClickListener(view -> {
@@ -82,8 +82,9 @@ public class AllCategoriesActivity extends AppCompatActivity implements Trending
             startActivity(i);
         });
 
-        getTrending();
+        //getTrending();
     }
+/*
 
     private void getTrending() {
         databaseReference.child("Ads").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -120,6 +121,7 @@ public class AllCategoriesActivity extends AppCompatActivity implements Trending
         no_Trending_ads_layout.setVisibility(View.VISIBLE);
         trendingRecyclerView.setVisibility(View.GONE);
     }
+*/
 
     @Override
     public void onItemClick(View view, int position) {

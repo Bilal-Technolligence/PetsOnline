@@ -62,11 +62,11 @@ public class AllMyAdsActivity extends AppCompatActivity {
     }
 
     private void loadPage(){
-        al.clear();
-        FirebaseDatabase.getInstance().getReference().child("Ads").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("Ads").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
+                    al.clear();
                     for (DataSnapshot eachAdRecord : dataSnapshot.getChildren()) {
                         String UploadedBy = Objects.requireNonNull(eachAdRecord.child("SellerID").getValue()).toString().trim();
 
@@ -78,6 +78,7 @@ public class AllMyAdsActivity extends AppCompatActivity {
                             p.setAd_Img(eachAdRecord.child("Image").getValue(String.class));
                             p.setAd_Address(eachAdRecord.child("Address").getValue(String.class));
                             p.setAd_Category_FID(eachAdRecord.child("Category").getValue(String.class));
+                            p.setAd_SubCategory(eachAdRecord.child("SubCategory").getValue(String.class));
                             p.setAd_Quantity(eachAdRecord.child("Quantity").getValue(String.class));
                             p.setAd_Sold(eachAdRecord.child("Sold").getValue(String.class));
                             p.setAd_Price(eachAdRecord.child("Price").getValue(String.class));
@@ -85,7 +86,12 @@ public class AllMyAdsActivity extends AppCompatActivity {
                             p.setSellerID(eachAdRecord.child("SellerID").getValue(String.class));
                             p.setDate(eachAdRecord.child("Date").getValue(String.class));
 
-                            al.add(p);
+                            String Deleted = "";
+                            if (eachAdRecord.child("Deleted").exists())
+                                Deleted  = eachAdRecord.child("Deleted").getValue(String.class);
+
+                            if (Deleted!=null && !Deleted.equalsIgnoreCase("true"))
+                                al.add(p);
                         }
 
                     }

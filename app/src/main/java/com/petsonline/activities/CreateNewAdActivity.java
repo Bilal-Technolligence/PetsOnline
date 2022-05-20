@@ -58,9 +58,7 @@ public class CreateNewAdActivity extends AppCompatActivity {
     private String[] rabbitsCategories;
     private String[] goatsCategories;
     private String[] parrotsCategories;
-
-    ArrayAdapter<String> spinnerArrayAdapterSubCategory;
-
+    private ArrayAdapter<String> spinnerArrayAdapterSubCategory;
     private ProgressBar progressBar;
 
     @Override
@@ -151,11 +149,6 @@ public class CreateNewAdActivity extends AppCompatActivity {
             if (Category.equals(""))
             {
                 Toast.makeText(this, "No Category Selected, Please Select one...", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if (spinnerSubCategory.getSelectedItemPosition() == 0)
-            {
-                Toast.makeText(this, "No Sub-Category Selected, Please Select one...", Toast.LENGTH_SHORT).show();
                 return;
             }
             if (edPrice.getText()==null || edPrice.getText().toString().equals(""))
@@ -265,7 +258,12 @@ public class CreateNewAdActivity extends AppCompatActivity {
                 DateFormat df = new SimpleDateFormat("ddMMyyyy HHmmss", Locale.getDefault());
                 map.put("Date",df.format(Calendar.getInstance().getTime()));
                 map.put("SellerID", FirebaseAuth.getInstance().getUid());
-                map.put("SubCategory",spinnerSubCategory.getSelectedItem().toString());
+                if (spinnerSubCategory.getSelectedItemPosition() == 0)
+                {
+                    map.put("SubCategory","All");
+                }
+                else
+                    map.put("SubCategory",spinnerSubCategory.getSelectedItem().toString());
 
                 firebaseDatabase.child("Ads").child(ID).setValue(map);
                 progressBar.setVisibility(View.GONE);

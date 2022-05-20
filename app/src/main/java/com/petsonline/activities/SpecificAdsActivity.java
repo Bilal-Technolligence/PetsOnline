@@ -130,7 +130,7 @@ public class SpecificAdsActivity extends AppCompatActivity implements AdapterVie
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        if (spinnerSubCategory.getSelectedItem().toString().equals("Select*"))
+        if (spinnerSubCategory.getSelectedItem().toString().equals("Select"))
             loadPage();
         else
             refresh(spinnerSubCategory.getSelectedItem().toString());
@@ -154,6 +154,7 @@ public class SpecificAdsActivity extends AppCompatActivity implements AdapterVie
                             p.setAd_Img(eachAdRecord.child("Image").getValue(String.class));
                             p.setAd_Address(eachAdRecord.child("Address").getValue(String.class));
                             p.setAd_Category_FID(eachAdRecord.child("Category").getValue(String.class));
+                            p.setAd_SubCategory(eachAdRecord.child("SubCategory").getValue(String.class));
                             p.setAd_Quantity(eachAdRecord.child("Quantity").getValue(String.class));
                             p.setAd_Sold(eachAdRecord.child("Sold").getValue(String.class));
                             p.setAd_Price(eachAdRecord.child("Price").getValue(String.class));
@@ -161,7 +162,12 @@ public class SpecificAdsActivity extends AppCompatActivity implements AdapterVie
                             p.setSellerID(eachAdRecord.child("SellerID").getValue(String.class));
                             p.setDate(eachAdRecord.child("Date").getValue(String.class));
 
-                            al.add(p);
+                            String Deleted = "";
+                            if (eachAdRecord.child("Deleted").exists())
+                                Deleted  = eachAdRecord.child("Deleted").getValue(String.class);
+
+                            if (Deleted!=null && !Deleted.equalsIgnoreCase("true"))
+                                al.add(p);
                         }
 
                     }
@@ -210,6 +216,7 @@ public class SpecificAdsActivity extends AppCompatActivity implements AdapterVie
                             p.setAd_Img(eachAdRecord.child("Image").getValue(String.class));
                             p.setAd_Address(eachAdRecord.child("Address").getValue(String.class));
                             p.setAd_Category_FID(eachAdRecord.child("Category").getValue(String.class));
+                            p.setAd_SubCategory(eachAdRecord.child("SubCategory").getValue(String.class));
                             p.setAd_Quantity(eachAdRecord.child("Quantity").getValue(String.class));
                             p.setAd_Sold(eachAdRecord.child("Sold").getValue(String.class));
                             p.setAd_Price(eachAdRecord.child("Price").getValue(String.class));
@@ -217,7 +224,12 @@ public class SpecificAdsActivity extends AppCompatActivity implements AdapterVie
                             p.setSellerID(eachAdRecord.child("SellerID").getValue(String.class));
                             p.setDate(eachAdRecord.child("Date").getValue(String.class));
 
-                            al.add(p);
+                            String Deleted = "";
+                            if (eachAdRecord.child("Deleted").exists())
+                                Deleted  = eachAdRecord.child("Deleted").getValue(String.class);
+
+                            if (Deleted!=null && !Deleted.equalsIgnoreCase("true"))
+                                al.add(p);
                         }
 
                     }

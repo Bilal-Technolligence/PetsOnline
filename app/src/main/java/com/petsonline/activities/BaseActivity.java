@@ -72,12 +72,12 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    eName = dataSnapshot.child("name").getValue().toString();
-                    name.setText(String.valueOf(eName));
-                    if (dataSnapshot.child("imageurl").getValue().toString().equals(" ")) {
+                    eName = Objects.requireNonNull(dataSnapshot.child("name").getValue()).toString();
+                    name.setText(eName);
+                    if (Objects.requireNonNull(dataSnapshot.child("imageurl").getValue()).toString().equals("")) {
 //                        Picasso.get().load( dataSnapshot.child( "imageurl" ).getValue().toString() ).into( imageView );
                     } else {
-                        Picasso.get().load(dataSnapshot.child("imageurl").getValue().toString()).into(imageView);
+                        Picasso.get().load(Objects.requireNonNull(dataSnapshot.child("imageurl").getValue()).toString()).into(imageView);
 
                     }
                 }

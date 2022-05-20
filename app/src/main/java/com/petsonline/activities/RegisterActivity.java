@@ -67,18 +67,25 @@ public class RegisterActivity extends AppCompatActivity {
                 eName = txtName.getText().toString();
                 String email=txtEmail.getText().toString().trim();
                 String password=txtPassword.getText().toString().trim();
+                String RePassword=txtReenterPassword.getText().toString().trim();
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-
                     txtEmail.setError("Invalid Email");
                     txtEmail.setFocusable(true);
-
-                } else if (password.length()<6){
+                }else if (password.length()<6){
                     txtPassword.setError("Password length must be more than 6 characters");
                     txtPassword.setFocusable(true);
-
-                }else if (spinnerLoginAs.getSelectedItemPosition() == 0){
+                }
+                else if (RePassword.length()<6){
+                    txtReenterPassword.setError("Confirmation Password length must be more than 6 characters");
+                    txtReenterPassword.setFocusable(true);
+                }
+                else if (!password.equals(RePassword)){
+                    Toast.makeText(RegisterActivity.this, "Passwords didn't matched!", Toast.LENGTH_SHORT).show();
+                }
+                else if (spinnerLoginAs.getSelectedItemPosition() == 0){
                     Toast.makeText(RegisterActivity.this, "Please select your SignUp Role", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else {
 
                     registeruser(email,password);
 //                    Intent intent=new Intent(RegisterActivity.this,CompleteProfile.class);

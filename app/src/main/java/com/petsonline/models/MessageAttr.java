@@ -6,16 +6,26 @@ public class MessageAttr {
     String SenderId;
     String message;
     String date;
+    String imgURL;
 
     public MessageAttr() {
     }
 
-    public MessageAttr(String id, String receiverId, String senderId, String message, String date) {
+    public MessageAttr(String id, String receiverId, String senderId, String message, String date, String imgURL) {
         this.id = id;
         ReceiverId = receiverId;
         SenderId = senderId;
         this.message = message;
         this.date = date;
+        this.imgURL = imgURL;
+    }
+
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
     }
 
     public String getId() {

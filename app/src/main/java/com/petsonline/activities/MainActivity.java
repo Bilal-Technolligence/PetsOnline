@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.petsonline.R;
 import com.petsonline.adapters.TrendingRecyclerViewAdapter;
+import com.petsonline.models.AdDetail;
 
 import java.util.Objects;
 
@@ -87,6 +88,9 @@ public class MainActivity extends BaseActivity implements TrendingRecyclerViewAd
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
+                    for (DataSnapshot ad: snapshot.getChildren()) {
+                        AdDetail adDetail = new AdDetail();
+                    }
                     trendingRecyclerViewAdapter = new TrendingRecyclerViewAdapter(MainActivity.this, null);
                     trendingRecyclerViewAdapter.setClickListener(MainActivity.this);
                     trendingRecyclerView.setAdapter(trendingRecyclerViewAdapter);

@@ -75,10 +75,10 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Trending"
+                            android:text="Popular Items"
                             android:textStyle="bold"
                             android:textColor="@color/blue"
-                            android:textSize="18dp"
+                            android:textSize="18sp"
                             android:layout_marginStart="5dp"
                             android:layout_marginTop="10dp"/>
 
@@ -105,7 +105,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:text="No Trending Ads Found"
+                                android:text="No Popular Items Found"
                                 android:textAlignment="center"/>
 
                         </LinearLayout>
@@ -119,17 +119,6 @@
                         android:textStyle="bold"
                         android:textColor="@color/blue"
                         android:textSize="18dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="10dp"/>
-
-                    <TextView
-                        android:id="@+id/gotoCategories"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="      See Categories"
-                        android:textStyle="bold"
-                        android:textColor="@color/blue"
-                        android:textSize="16dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="10dp"/>
 
@@ -149,6 +138,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="      See Doctors"
+                        android:textStyle="bold"
+                        android:textColor="@color/blue"
+                        android:textSize="16dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"/>
+
+                    <TextView
+                        android:id="@+id/gotoCategories"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="      See Categories"
                         android:textStyle="bold"
                         android:textColor="@color/blue"
                         android:textSize="16dp"

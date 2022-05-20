@@ -56,8 +56,7 @@ public class AllCareTakersActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot eachAdRecord : dataSnapshot.getChildren()) {
-                        if (eachAdRecord.child("role").exists()
-                             )
+                        if (eachAdRecord.child("role").exists())
                         {
                             String Role = eachAdRecord.child("role").getValue(String.class);
                             if (!Objects.equals(Role, "Care Taker"))

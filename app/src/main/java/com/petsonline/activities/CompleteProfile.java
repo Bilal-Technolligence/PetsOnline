@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,9 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.petsonline.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,12 +25,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
+import com.petsonline.R;
 import com.petsonline.models.profiledata;
 import com.petsonline.util.BaseUtil;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class CompleteProfile extends AppCompatActivity {
     EditText eName,eMobile,eEmail,eAddress,eAge;
@@ -52,6 +49,8 @@ public class CompleteProfile extends AppCompatActivity {
     StorageReference storageReference ;
     private FirebaseAuth mAuth;
     private String Role = "";
+    String id;
+    profiledata mProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,16 +70,12 @@ public class CompleteProfile extends AppCompatActivity {
         name = in.getStringExtra( "name" );
 
         pimage=(ImageView)findViewById(R.id.pimage);
-        pimage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        pimage.setOnClickListener(v -> {
 //                Intent intent=new Intent();
 //                intent.setType("images/*");
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, 2);
-            }
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intent, 2);
         });
-
 
         database=FirebaseDatabase.getInstance();
         ref = database.getReference("Employee_Profile");
@@ -88,7 +83,7 @@ public class CompleteProfile extends AppCompatActivity {
         storageReference=storage.getReference();
         mAuth = FirebaseAuth.getInstance();
 
-        final String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         database.getReference("Users").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -108,88 +103,60 @@ public class CompleteProfile extends AppCompatActivity {
             }
         });
 
-        eConfirm.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (filepath==null)
-                {
-                    Toast.makeText(getApplicationContext(), "Please enter all Information", Toast.LENGTH_SHORT).show();
-                }
-                else if (!eName.getText().toString().isEmpty() && !eMobile.getText().toString().isEmpty()&& !eAddress.getText().toString().isEmpty()&& !eAge.getText().toString().isEmpty() && !filepath.getPath().isEmpty() )
-                {
-                    progressDialog.setMessage("Profile Data Saving....");
-                    progressDialog.show();
+        eConfirm.setOnClickListener(v -> {
+            if (!eName.getText().toString().isEmpty() && !eMobile.getText().toString().isEmpty()&& !eAddress.getText().toString().isEmpty()&& !eAge.getText().toString().isEmpty() )
+            {
+                progressDialog.setMessage("Profile Data Saving....");
+                progressDialog.show();
 
-                    final String push = FirebaseDatabase.getInstance().getReference().child("Packages").push().getKey();
+                if (filepath!=null)
+                {
+                    final String push = FirebaseDatabase.getInstance().getReference().child("images").push().getKey();
                     StorageReference fileReference  = storageReference.child("images/"+ push);
                     fileReference.putFile(filepath)
-                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    if(filepath!=null) {
-                                        profiledata profiledata = new profiledata();
-                                        profiledata.setID(id);
-                                        Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                                        while (!uriTask.isSuccessful());
-                                        Uri downloadUri = uriTask.getResult();
-                                        profiledata.setIMAGEURL(downloadUri.toString());
-                                        profiledata.setNAME(eName.getText().toString());
-                                        profiledata.setMOBILE(eMobile.getText().toString());
-                                        profiledata.setADDRESS(eAddress.getText().toString());
-                                        profiledata.setAge(eAge.getText().toString());
-                                        profiledata.setPROFILECOMPLETED("true");
-                                        profiledata.setROLE(Role);
+                            .addOnSuccessListener(taskSnapshot -> {
+                                mProfile = new profiledata();
+                                mProfile.setID(id);
+                                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                                while (!uriTask.isSuccessful());
+                                Uri downloadUri = uriTask.getResult();
+                                mProfile.setIMAGEURL(downloadUri.toString());
+                                mProfile.setNAME(eName.getText().toString());
+                                mProfile.setMOBILE(eMobile.getText().toString());
+                                mProfile.setADDRESS(eAddress.getText().toString());
+                                mProfile.setAge(eAge.getText().toString());
+                                mProfile.setPROFILECOMPLETED("true");
+                                mProfile.setROLE(Role);
 
-                                        new BaseUtil(CompleteProfile.this).SetLoggedIn(true);
+                                new BaseUtil(CompleteProfile.this).SetLoggedIn(true);
 
-                                        ref.child(id).setValue(profiledata);
-                                        progressDialog.dismiss();
-                                        Toast.makeText(CompleteProfile.this,"profile successfully saved..",Toast.LENGTH_LONG).show();
-
-
-                                        FirebaseDatabase.getInstance().getReference().child("Users")
-                                                .child(id).addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                String Role = dataSnapshot.child("Role").getValue(String.class);
-                                                switch (Role) {
-                                                    case "Buyer/Seller":
-                                                        startActivity(new Intent(CompleteProfile.this, MainActivity.class));
-                                                        break;
-                                                    case "Care Taker":
-                                                        startActivity(new Intent(CompleteProfile.this, CareTakerActivity.class));
-                                                        break;
-                                                    case "Doctor":
-                                                        startActivity(new Intent(CompleteProfile.this, DoctorActivity.class));
-                                                        break;
-                                                    default:
-                                                        startActivity(new Intent(CompleteProfile.this, LoginActivity.class));
-                                                        break;
-                                                }
-                                                finish();
-                                            }
-
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                            }
-                                        });
-                                    }
-                                }
+                                SaveProfile(mProfile);
                             })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(getApplicationContext(), "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                            .addOnFailureListener(e -> Toast.makeText(getApplicationContext(), "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show());
                 }
                 else
                 {
-                    Toast.makeText(getApplicationContext(), "Please enter all Information", Toast.LENGTH_SHORT).show();
-                }
+                    mProfile = new profiledata();
+                    mProfile.setID(id);
+                    mProfile.setIMAGEURL("");
+                    mProfile.setNAME(eName.getText().toString());
+                    mProfile.setMOBILE(eMobile.getText().toString());
+                    mProfile.setADDRESS(eAddress.getText().toString());
+                    mProfile.setAge(eAge.getText().toString());
+                    mProfile.setPROFILECOMPLETED("true");
+                    mProfile.setROLE(Role);
 
+                    new BaseUtil(CompleteProfile.this).SetLoggedIn(true);
+
+                    SaveProfile(mProfile);
+                }
             }
-        } );
+            else
+            {
+                Toast.makeText(getApplicationContext(), "Please enter all Information", Toast.LENGTH_SHORT).show();
+            }
+
+        });
 
         ref.child(id).addListenerForSingleValueEvent( new ValueEventListener() {
             @Override
@@ -219,30 +186,27 @@ public class CompleteProfile extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M){
-          //  final Uri data = intent.getData();
-           // final File file = new File(data.getPath());
-            // now you can upload your image file
-            filepath=data.getData();
-        } else {
-            if (data != null && data.getData() != null){
-
+        if (data!=null)
+        {
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M){
                 filepath=data.getData();
-                try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),filepath);
-                    pimage.setImageBitmap(bitmap);
-
-
-                } catch (IOException e) {
-                    e.printStackTrace();
+                pimage.setImageURI(filepath);
+            } else {
+                if (data.getData() != null){
+                    filepath=data.getData();
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),filepath);
+                        pimage.setImageBitmap(bitmap);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-
             }
         }
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -250,6 +214,39 @@ public class CompleteProfile extends AppCompatActivity {
         in.putExtra( "name", String.valueOf( name ) );
         startActivity(in);
         finish();*/
+    }
+
+    void SaveProfile(profiledata profiledata){
+        ref.child(id).setValue(profiledata);
+        progressDialog.dismiss();
+        Toast.makeText(CompleteProfile.this,"profile successfully saved..",Toast.LENGTH_LONG).show();
+
+        FirebaseDatabase.getInstance().getReference().child("Users")
+                .child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String Role = dataSnapshot.child("Role").getValue(String.class);
+                        switch (Objects.requireNonNull(Role)) {
+                            case "Buyer/Seller":
+                                startActivity(new Intent(CompleteProfile.this, MainActivity.class));
+                                break;
+                            case "Care Taker":
+                                startActivity(new Intent(CompleteProfile.this, CareTakerActivity.class));
+                                break;
+                            case "Doctor":
+                                startActivity(new Intent(CompleteProfile.this, DoctorActivity.class));
+                                break;
+                            default:
+                                startActivity(new Intent(CompleteProfile.this, LoginActivity.class));
+                                break;
+                        }
+                        finish();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
     }
 
 }

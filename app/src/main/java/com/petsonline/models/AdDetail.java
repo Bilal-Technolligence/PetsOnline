@@ -14,10 +14,11 @@ public class AdDetail implements Serializable {
     String Ad_Address;
     String SellerID;
     String Date;
+    String Ad_SubCategory;
 
     public AdDetail(){}
 
-    public AdDetail(String ad_ID, String ad_Category_FID, String ad_Img, String ad_Price, String ad_Quantity, String ad_Sold, String ad_Desc, String ad_Title, String ad_Address, String sellerID, String date) {
+    public AdDetail(String ad_ID, String ad_Category_FID, String ad_Img, String ad_Price, String ad_Quantity, String ad_Sold, String ad_Desc, String ad_Title, String ad_Address, String sellerID, String date, String ad_SubCategory) {
         Ad_ID = ad_ID;
         Ad_Category_FID = ad_Category_FID;
         Ad_Img = ad_Img;
@@ -29,6 +30,15 @@ public class AdDetail implements Serializable {
         Ad_Address = ad_Address;
         SellerID = sellerID;
         Date = date;
+        Ad_SubCategory = ad_SubCategory;
+    }
+
+    public String getAd_SubCategory() {
+        return Ad_SubCategory;
+    }
+
+    public void setAd_SubCategory(String ad_SubCategory) {
+        Ad_SubCategory = ad_SubCategory;
     }
 
     public String getDate() {

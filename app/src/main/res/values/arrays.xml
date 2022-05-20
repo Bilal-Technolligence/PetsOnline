@@ -9,6 +9,7 @@
         <item>Goats</item>
         <item>Parrots</item>
     </string-array>
+
     <string-array name="LoginAs">
         <item>Select*</item>
         <item>Buyer/Seller</item>
@@ -17,7 +18,7 @@
     </string-array>
 
     <string-array name="CatsSubCategory">
-        <item>Select*</item>
+        <item>Select</item>
         <item>Polydactyl</item>
         <item>Calico</item>
         <item>Persian</item>
@@ -25,7 +26,7 @@
     </string-array>
 
     <string-array name="DogsSubCategory">
-        <item>Select*</item>
+        <item>Select</item>
         <item>Bulldog</item>
         <item>German Shepherd</item>
         <item>Husky</item>
@@ -33,7 +34,7 @@
     </string-array>
 
     <string-array name="HensSubCategory">
-        <item>Select*</item>
+        <item>Select</item>
         <item>Araucana</item>
         <item>Brahma</item>
         <item>Cochin</item>
@@ -41,7 +42,7 @@
     </string-array>
 
     <string-array name="RabbitsSubCategory">
-        <item>Select*</item>
+        <item>Select</item>
         <item>Alaska</item>
         <item>Altex</item>
         <item>American</item>
@@ -49,7 +50,7 @@
     </string-array>
 
     <string-array name="GoatsSubCategory">
-        <item>Select*</item>
+        <item>Select</item>
         <item>Kamori</item>
         <item>Boer goat</item>
         <item>American Pygmy</item>
@@ -57,7 +58,7 @@
     </string-array>
 
     <string-array name="ParrotsSubCategory">
-        <item>Select*</item>
+        <item>Select</item>
         <item>Lovebirds</item>
         <item>Cockatoos</item>
         <item>Parrots</item>

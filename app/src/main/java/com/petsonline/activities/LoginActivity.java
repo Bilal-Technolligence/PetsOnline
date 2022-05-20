@@ -75,7 +75,11 @@ public class LoginActivity extends AppCompatActivity {
             if (!Patterns.EMAIL_ADDRESS.matcher(EMAIL).matches()){
                 emailValidate.setError("Invalid email");
                 emailValidate.setFocusable(true);
-            }else {
+            }else if (password.length()<6){
+                password.setError("Password length must be more than 6 characters");
+                password.setFocusable(true);
+            }
+            else {
                 progressDialog.show();
                 firbaseAuthenticationClass.LoginUser(EMAIL,PASSWORD, LoginActivity.this, progressDialog);
             }

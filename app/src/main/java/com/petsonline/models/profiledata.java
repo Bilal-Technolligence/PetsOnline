@@ -1,7 +1,6 @@
 package com.petsonline.models;
 
 public class profiledata {
-
     String ID;
     private String NAME;
     private String MOBILE;
