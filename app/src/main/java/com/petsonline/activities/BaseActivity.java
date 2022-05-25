@@ -110,7 +110,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
 
-            case R.id.home: {
+            /*case R.id.home: {
                 Intent in = new Intent(this, MainActivity.class);
                 startActivity(in);
                 finish();
@@ -123,14 +123,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 //finish();
 
                 break;
-            }
-            case R.id.history: {
-                //Intent in = new Intent(this, ChatList.class);
-                //startActivity(in);
-                //finish();
-                break;
-
-            }
+            }*/
 
             case R.id.logout: {
 

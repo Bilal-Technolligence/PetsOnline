@@ -3,6 +3,7 @@ package com.petsonline.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.petsonline.R;
 import com.petsonline.activities.ChatWithoutAdActivity;
+import com.petsonline.models.MessageAttr;
 import com.petsonline.models.UserAttr;
 import com.petsonline.activities.Chat;
 import com.squareup.picasso.Picasso;
@@ -31,13 +34,15 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     Context context;
     Activity activity;
     DatabaseReference dref = FirebaseDatabase.getInstance().getReference();
-    String da=" ";
+    String da = " ";
     String ms = " ";
+    String MyID = "";
 
-    public ChatListAdapter(ArrayList<UserAttr> userAttrs, Context context, Activity activity) {
+    public ChatListAdapter(ArrayList<UserAttr> userAttrs, Context context, Activity activity,String ownID) {
         this.context = context;
         this.userAttrs = userAttrs;
         this.activity = activity;
+        MyID = ownID ;
     }
 
     @NonNull
@@ -51,19 +56,54 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.name.setText(userAttrs.get(position).getName());
-        Picasso.get().load(userAttrs.get(position).getImageUrl()).into(holder.profile);
+        if (userAttrs.get(position).getImageUrl() != null && !userAttrs.get(position).getImageUrl().equals(""))
+            Picasso.get().load(userAttrs.get(position).getImageUrl()).into(holder.profile);
+        else
+            holder.profile.setImageResource(R.drawable.profile);
+
         final String id = userAttrs.get(position).getId();
-        dref.child("ChatList").orderByChild("receiverId").equalTo(id).limitToLast(1).addValueEventListener(new ValueEventListener() {
+
+        dref.child("ChatList").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {
-                    for (DataSnapshot ds : snapshot.getChildren()) {
-                        if (ds.exists()) {
-                            da = ds.child("date").getValue().toString();
-                            ms = ds.child("message").getValue().toString();
+                    if (snapshot.exists()) {
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            if (ds.exists()) {
+                                String ReceiverId = ds.child("ReceiverId").getValue().toString();
+                                String SenderId = ds.child("SenderId").getValue().toString();
+
+                                if (ReceiverId.equals(MyID) && SenderId.equals(id)
+                                    ||
+                                        ReceiverId.equals(id) && SenderId.equals(MyID) )
+                                {
+                                    dref.child("Messages").child(ds.getKey()).orderByKey().limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            try {
+                                                if (dataSnapshot.exists()) {
+
+                                                    for (DataSnapshot s:dataSnapshot.getChildren()) {
+                                                        da = s.child("date").getValue().toString();
+                                                        ms = s.child("message").getValue().toString();
+                                                        holder.date.setText(da);
+                                                        holder.msg.setText(ms);
+                                                    }
+                                                }
+                                            } catch (Exception e) {
+                                                Log.e("Error ", e.getMessage());
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+                                    break;
+                                }
+                            }
                         }
-                        holder.date.setText(da);
-                        holder.msg.setText(ms);
                     }
                 } catch (Exception e) {
 
@@ -75,28 +115,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
 
             }
         });
-        dref.child("ChatList").orderByChild("senderId").equalTo(id).limitToLast(1).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                try {
-                    for (DataSnapshot ds : snapshot.getChildren()) {
-                        if (ds.exists()) {
-                            da = ds.child("date").getValue().toString();
-                            ms = ds.child("message").getValue().toString();
-                        }
-                    }
-                    holder.date.setText(da);
-                    holder.msg.setText(ms);
-                } catch (Exception e) {
 
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

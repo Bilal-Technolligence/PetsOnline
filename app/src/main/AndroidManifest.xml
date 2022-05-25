@@ -9,6 +9,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PetsOnline">
         <activity
+            android:name=".activities.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.OwnAdDetailActivity"
             android:exported="false" />
         <activity

@@ -28,6 +28,7 @@ public class ChatList extends AppCompatActivity {
 
     ArrayList<String> chaterId=new ArrayList<>();
     ArrayList<UserAttr> userAttrs=new ArrayList<>();
+    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class ChatList extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //Toast.makeText(getApplicationContext() , "Msg" , Toast.LENGTH_LONG).show();
         try {
-            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
             dref.child("ChatList").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -111,7 +112,7 @@ public class ChatList extends AppCompatActivity {
                         UserAttr p = new UserAttr(Id,Name,Email,Contact,Imageurl,City,Language);
                         userAttrs.add(p);
                     }
-                    recyclerView.setAdapter(new ChatListAdapter(userAttrs , getApplicationContext() , ChatList.this));
+                    recyclerView.setAdapter(new ChatListAdapter(userAttrs , getApplicationContext() , ChatList.this,userId));
                 }
 
                 @Override

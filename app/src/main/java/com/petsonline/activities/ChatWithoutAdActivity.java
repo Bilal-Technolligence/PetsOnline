@@ -182,7 +182,7 @@ public class ChatWithoutAdActivity extends AppCompatActivity {
         try {
             if (editText.getText() != null && !editText.getText().toString().trim().equals("")) {
                 calendar = Calendar.getInstance();
-                dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                dateFormat = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy", Locale.getDefault());
                 date = dateFormat.format(calendar.getTime());
 
                 if (ChatID == null || ChatID.equals("")) {

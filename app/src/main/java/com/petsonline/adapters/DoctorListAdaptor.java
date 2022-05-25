@@ -13,15 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.petsonline.R;
 import com.petsonline.models.CareTaker;
+import com.petsonline.models.Doctor;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class CareTakerListAdaptor extends RecyclerView.Adapter<CareTakerListAdaptor.MyHolder> {
+public class DoctorListAdaptor extends RecyclerView.Adapter<DoctorListAdaptor.MyHolder> {
     Context ct;
-    ArrayList<CareTaker> al;
+    ArrayList<Doctor> al;
 
-    public CareTakerListAdaptor(Context cont, ArrayList<CareTaker> al) {
+    public DoctorListAdaptor(Context cont, ArrayList<Doctor> al) {
         this.ct = cont;
         this.al = al;
     }
@@ -36,8 +37,8 @@ public class CareTakerListAdaptor extends RecyclerView.Adapter<CareTakerListAdap
     }
 
     @Override
-    public void onBindViewHolder(CareTakerListAdaptor.MyHolder holder, final int position) {
-        final CareTaker p1 = al.get(position);
+    public void onBindViewHolder(DoctorListAdaptor.MyHolder holder, final int position) {
+        final Doctor p1 = al.get(position);
 
         if (p1.getNAME()!=null && !p1.getNAME().equals(""))
             holder.name.setText("Name : " + p1.getNAME());
@@ -48,21 +49,6 @@ public class CareTakerListAdaptor extends RecyclerView.Adapter<CareTakerListAdap
             holder.address.setText("Address : " + p1.getADDRESS());
         else
             holder.address.setVisibility(View.GONE);
-
-        if (p1.getFEEPERDAY()!=null && !p1.getFEEPERDAY().equals(""))
-            holder.chargesperday.setText("Charges Per day : " + p1.getFEEPERDAY());
-        else
-            holder.chargesperday.setVisibility(View.GONE);
-
-        if (p1.getFEEPERHOUR()!=null && !p1.getFEEPERHOUR().equals(""))
-            holder.chargesperhour.setText("Charges Per hour : " + p1.getFEEPERHOUR());
-        else
-            holder.chargesperhour.setVisibility(View.GONE);
-
-        if (p1.getSTARTINGTIME()!=null && !p1.getSTARTINGTIME().equals("") && p1.getENDINGTIME()!=null && !p1.getENDINGTIME().equals(""))
-            holder.opening_hours.setText( p1.getSTARTINGTIME().concat(" - ").concat(p1.getENDINGTIME()));
-        else
-            holder.opening_hours.setVisibility(View.GONE);
 
         if (p1.getIMAGEURL() != null && !p1.getIMAGEURL().equals(""))
             Picasso.get().load(p1.getIMAGEURL()).into(holder.image);
