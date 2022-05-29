@@ -2,6 +2,7 @@ package com.petsonline.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.petsonline.R;
+import com.petsonline.activities.DetailPictureActivity;
 import com.petsonline.models.MessageAttr;
 import com.squareup.picasso.Picasso;
 
@@ -46,8 +48,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int pos) {
         try {
+            int position = pos;
             String newDate = "";
             String DateOldFromMsg;
             Date nd2;
@@ -74,27 +77,47 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             } else {
                 holder.date.setText(newDate);
             }
-            if (!messageAttrs.get(position).getMessage().equals(""))
+            //if (!messageAttrs.get(position).getMessage().equals(""))
                 if (userId.equals(messageAttrs.get(position).getSenderId())) {
                     if (messageAttrs.get(position).getImgURL() != null && !Objects.equals(messageAttrs.get(position).getImgURL(), "")) {
                         holder.chatImgSender.setVisibility(View.VISIBLE);
                         Picasso.get().load(messageAttrs.get(position).getImgURL()).into(holder.chatImgSender);
+                        holder.chatImgSender.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                context.startActivity(new Intent(context, DetailPictureActivity.class).putExtra("ImageURL",messageAttrs.get(position).getImgURL()));
+                            }
+                        });
                     }
                     holder.chatImgReceiver.setVisibility(View.GONE);
                     holder.senderMessage.setVisibility(View.VISIBLE);
                     holder.receiverMessage.setVisibility(View.GONE);
                     holder.senderMessage.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.drawable.background_right, context.getTheme()));
-                    holder.senderMessage.setText(messageAttrs.get(position).getMessage());
-                } else {
+                    if (!messageAttrs.get(position).getMessage().equals(""))
+                        holder.senderMessage.setText(messageAttrs.get(position).getMessage());
+                    else
+                        holder.senderMessage.setVisibility(View.GONE);
+                }
+                else {
                     if (messageAttrs.get(position).getImgURL() != null && !Objects.equals(messageAttrs.get(position).getImgURL(), "")) {
                         holder.chatImgReceiver.setVisibility(View.VISIBLE);
+
                         Picasso.get().load(messageAttrs.get(position).getImgURL()).into(holder.chatImgReceiver);
+                        holder.chatImgReceiver.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                context.startActivity(new Intent(context, DetailPictureActivity.class).putExtra("ImageURL",messageAttrs.get(position).getImgURL()));
+                            }
+                        });
                     }
                     holder.chatImgSender.setVisibility(View.GONE);
                     holder.senderMessage.setVisibility(View.GONE);
                     holder.receiverMessage.setVisibility(View.VISIBLE);
                     holder.receiverMessage.setBackground(ResourcesCompat.getDrawable(context.getResources(), R.drawable.button_round, context.getTheme()));
-                    holder.receiverMessage.setText(messageAttrs.get(position).getMessage());
+                    if (!messageAttrs.get(position).getMessage().equals(""))
+                        holder.receiverMessage.setText(messageAttrs.get(position).getMessage());
+                    else
+                        holder.receiverMessage.setVisibility(View.GONE);
                 }
         } catch (Exception e) {
             Log.e("Error", e.getMessage());

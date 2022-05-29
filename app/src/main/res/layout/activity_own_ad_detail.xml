@@ -103,6 +103,7 @@
                 android:textSize="20sp" />
 
             <EditText
+                android:maxLength="15"
                 android:id="@+id/edTitle"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -134,6 +135,7 @@
                 app:drawableLeftCompat="@drawable/marker" />
 
             <EditText
+                android:maxLength="15"
                 android:id="@+id/edAddress"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -243,6 +245,7 @@
                     android:layout_gravity="center" />
 
                 <EditText
+                    android:maxLength="3"
                     android:id="@+id/edQuantity"
                     android:layout_width="0dp"
                     android:layout_weight="1"

@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,7 +63,6 @@ public class Chat extends AppCompatActivity {
     private String MineID;
     private String AdID;
     private String ChatID = "";
-
     private StorageReference storageReference;
     private ProgressDialog progressDialog;
     private ImageView imgAttachBtn;
@@ -70,6 +70,8 @@ public class Chat extends AppCompatActivity {
     private ImageView imageViewAttachPicture;
     private Uri SelectedImg;
     private View AttachedImgView;
+
+    private ValueEventListener valueEventListener1,valueEventListener2,valueEventListener3,valueEventListener4,valueEventListener5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +122,7 @@ public class Chat extends AppCompatActivity {
 
         LoadSellerProfile();
         CheckChat();
+        UpdateReadReceipt();
 
         btnBuyProduct.setOnClickListener(view -> FirebaseDatabase.getInstance().getReference().child("Ads").child(AdID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -168,8 +171,32 @@ public class Chat extends AppCompatActivity {
         }));
     }
 
+    private void UpdateReadReceipt() {
+        dref.child("ChatList").child(ChatID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists())
+                {
+                    if (snapshot.child("LastMsg").exists())
+                    {
+                        String LastMsgBy = snapshot.child("LastMsg").getValue().toString();
+                        if (!LastMsgBy.equals(MineID))
+                        {
+                            dref.child("ChatList").child(ChatID).child("Read").setValue("true");
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     private void LoadSellerProfile() {
-        dref.child("Employee_Profile").child(SellerID).addValueEventListener(new ValueEventListener() {
+        dref.child("Employee_Profile").child(SellerID).addValueEventListener(valueEventListener1 = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -177,8 +204,10 @@ public class Chat extends AppCompatActivity {
                         String name = dataSnapshot.child("name").getValue().toString();
                         String pic = dataSnapshot.child("imageurl").getValue().toString();
                         textName.setText(name);
-                        Picasso.get().load(pic).into(imageProfile);
-                    } catch (Exception ignored) {
+                        if (!pic.equals(""))
+                            Picasso.get().load(pic).into(imageProfile);
+                    } catch (Exception e) {
+                        Log.e("Error",e.getMessage());
                     }
                 }
             }
@@ -191,7 +220,7 @@ public class Chat extends AppCompatActivity {
     }
 
     private void CheckChat() {
-        dref.child("ChatList").addValueEventListener(new ValueEventListener() {
+        dref.child("ChatList").addValueEventListener(valueEventListener2 = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 try {
@@ -225,7 +254,7 @@ public class Chat extends AppCompatActivity {
     }
 
     private void LoadChat(String chat_id) {
-        dref.child("Messages").child(chat_id).addValueEventListener(new ValueEventListener() {
+        dref.child("Messages").child(chat_id).addValueEventListener(valueEventListener3 = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 messageAttrs.clear();
@@ -261,7 +290,6 @@ public class Chat extends AppCompatActivity {
 
         dref.child("ChatList").child(ChatID).child("ReceiverId").setValue(SellerID);
         dref.child("ChatList").child(ChatID).child("SenderId").setValue(MineID);
-        dref.child("ChatList").child(ChatID).child("SenderId").setValue(MineID);
         dref.child("ChatList").child(ChatID).child("AdID").setValue(AdID);
     }
 
@@ -270,7 +298,6 @@ public class Chat extends AppCompatActivity {
 
         dref.child("ChatList").child(ChatID).child("ReceiverId").setValue(SellerID);
         dref.child("ChatList").child(ChatID).child("SenderId").setValue(MineID);
-        dref.child("ChatList").child(ChatID).child("SenderId").setValue(MineID);
         dref.child("ChatList").child(ChatID).child("AdID").setValue(AdID);
 
         SendMsg();
@@ -278,7 +305,9 @@ public class Chat extends AppCompatActivity {
 
     private void SendMsg() {
         try {
-            if (editText.getText() != null && !editText.getText().toString().trim().equals("")) {
+            if (editText.getText() != null && !editText.getText().toString().trim().equals("") || SelectedImg!=null) {
+                dref.child("ChatList").child(ChatID).child("Read").setValue("false");
+                dref.child("ChatList").child(ChatID).child("LastMsg").setValue(MineID);
                 calendar = Calendar.getInstance();
                 dateFormat = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy", Locale.getDefault());
                 date = dateFormat.format(calendar.getTime());
@@ -290,7 +319,7 @@ public class Chat extends AppCompatActivity {
 
                 DatabaseReference MsgRef = dref.child("Messages").child(ChatID);
 
-                MsgRef.orderByKey().limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
+                MsgRef.orderByKey().limitToLast(1).addListenerForSingleValueEvent(valueEventListener4 = new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String MsgID = "1";
@@ -337,7 +366,8 @@ public class Chat extends AppCompatActivity {
                             MessageAttr msg = new MessageAttr();
                             msg.setReceiverId(SellerID);
                             msg.setSenderId(MineID);
-                            msg.setMessage(editText.getText().toString());
+                            if (editText.getText()!=null)
+                                msg.setMessage(editText.getText().toString().trim());
                             msg.setDate(date);
                             editText.setText("");
                             MsgRef.child(msgID).setValue(msg);
@@ -360,7 +390,6 @@ public class Chat extends AppCompatActivity {
 
         dref.child("ChatList").child(ChatID).child("ReceiverId").setValue(SellerID);
         dref.child("ChatList").child(ChatID).child("SenderId").setValue(MineID);
-        dref.child("ChatList").child(ChatID).child("SenderId").setValue(MineID);
         dref.child("ChatList").child(ChatID).child("AdID").setValue(AdID);
 
         OrderHasBeenPlaced();
@@ -368,6 +397,8 @@ public class Chat extends AppCompatActivity {
 
     private void OrderHasBeenPlaced() {
         try {
+            dref.child("ChatList").child(ChatID).child("Read").setValue("false");
+            dref.child("ChatList").child(ChatID).child("LastMsg").setValue(MineID);
             calendar = Calendar.getInstance();
             dateFormat = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy", Locale.getDefault());
             date = dateFormat.format(calendar.getTime());
@@ -379,7 +410,7 @@ public class Chat extends AppCompatActivity {
 
             DatabaseReference MsgRef = dref.child("Messages").child(ChatID);
 
-            MsgRef.orderByKey().limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
+            MsgRef.orderByKey().limitToLast(1).addListenerForSingleValueEvent(valueEventListener5 = new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     String MsgID = "1";
@@ -422,15 +453,86 @@ public class Chat extends AppCompatActivity {
             } else {
                 if (data.getData() != null) {
                     SelectedImg = data.getData();
-                    try {
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), SelectedImg);
-                        imageViewAttachPicture.setImageBitmap(bitmap);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    Glide.with(this).load(SelectedImg).into(imageViewAttachPicture);
+                    //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), SelectedImg);
+                    //imageViewAttachPicture.setImageBitmap(bitmap);
                 }
             }
         }
     }
 
+    @Override
+    protected void onStop() {
+        if (valueEventListener1 !=null)
+        {
+            dref.removeEventListener(valueEventListener1);
+        }
+        if (valueEventListener2 !=null)
+        {
+            dref.removeEventListener(valueEventListener2);
+        }
+        if (valueEventListener3 !=null)
+        {
+            dref.removeEventListener(valueEventListener3);
+        }
+        if (valueEventListener4 !=null)
+        {
+            dref.removeEventListener(valueEventListener4);
+        }
+        if (valueEventListener5 !=null)
+        {
+            dref.removeEventListener(valueEventListener5);
+        }
+        super.onStop();
+    }
+
+    @Override
+    protected void onPause() {
+        if (valueEventListener1 !=null)
+        {
+            dref.removeEventListener(valueEventListener1);
+        }
+        if (valueEventListener2 !=null)
+        {
+            dref.removeEventListener(valueEventListener2);
+        }
+        if (valueEventListener3 !=null)
+        {
+            dref.removeEventListener(valueEventListener3);
+        }
+        if (valueEventListener4 !=null)
+        {
+            dref.removeEventListener(valueEventListener4);
+        }
+        if (valueEventListener5 !=null)
+        {
+            dref.removeEventListener(valueEventListener5);
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (valueEventListener1 !=null)
+        {
+            dref.removeEventListener(valueEventListener1);
+        }
+        if (valueEventListener2 !=null)
+        {
+            dref.removeEventListener(valueEventListener2);
+        }
+        if (valueEventListener3 !=null)
+        {
+            dref.removeEventListener(valueEventListener3);
+        }
+        if (valueEventListener4 !=null)
+        {
+            dref.removeEventListener(valueEventListener4);
+        }
+        if (valueEventListener5 !=null)
+        {
+            dref.removeEventListener(valueEventListener5);
+        }
+        super.onDestroy();
+    }
 }

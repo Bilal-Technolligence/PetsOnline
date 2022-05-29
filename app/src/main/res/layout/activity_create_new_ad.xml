@@ -78,6 +78,7 @@
                     android:id="@+id/edPrice"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:maxLength="6"
                     android:layout_height="match_parent"
                     android:inputType="number"/>
 
@@ -106,6 +107,7 @@
                     android:id="@+id/edTitle"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:maxLength="15"
                     android:layout_height="match_parent"
                     android:inputType="text"/>
 
@@ -136,6 +138,7 @@
                     android:id="@+id/edAddress"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:maxLength="15"
                     android:layout_height="match_parent"
                     android:inputType="text"/>
 
@@ -242,6 +245,7 @@
                         android:layout_gravity="center" />
 
                     <EditText
+                        android:maxLength="3"
                         android:id="@+id/edQuantity"
                         android:layout_width="0dp"
                         android:layout_weight="1"
@@ -267,6 +271,7 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:maxLength="15"
                     android:id="@+id/edDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

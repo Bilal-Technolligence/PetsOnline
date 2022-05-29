@@ -13,6 +13,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -65,8 +66,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
         //header click navbar
         View headerview = navigationView.getHeaderView(0);
-        imageView = (ImageView) headerview.findViewById(R.id.profile_image);
-        name = (TextView) headerview.findViewById(R.id.ename);
+        imageView = headerview.findViewById(R.id.profile_image);
+        name = headerview.findViewById(R.id.ename);
 
         dref.child("Employee_Profile").child(uid).addValueEventListener(new ValueEventListener() {
             @Override
@@ -77,8 +78,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                     if (Objects.requireNonNull(dataSnapshot.child("imageurl").getValue()).toString().equals("")) {
 //                        Picasso.get().load( dataSnapshot.child( "imageurl" ).getValue().toString() ).into( imageView );
                     } else {
-                        Picasso.get().load(Objects.requireNonNull(dataSnapshot.child("imageurl").getValue()).toString()).into(imageView);
-
+                        Glide.with(BaseActivity.this).load(Objects.requireNonNull(dataSnapshot.child("imageurl").getValue()).toString()).into(imageView);
+                        //Picasso.get().load().into();
                     }
                 }
 

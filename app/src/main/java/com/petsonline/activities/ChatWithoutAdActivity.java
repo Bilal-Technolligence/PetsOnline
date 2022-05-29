@@ -45,6 +45,8 @@ public class ChatWithoutAdActivity extends AppCompatActivity {
     String MineID;
     String ChatID = "";
 
+    private ValueEventListener valueEventListener1,valueEventListener2,valueEventListener3,valueEventListener4,valueEventListener5;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +75,7 @@ public class ChatWithoutAdActivity extends AppCompatActivity {
     }
 
     private void LoadSellerProfile() {
-        dref.child("Employee_Profile").child(SellerID).addValueEventListener(new ValueEventListener() {
+        dref.child("Employee_Profile").child(SellerID).addValueEventListener(valueEventListener1 = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -81,7 +83,8 @@ public class ChatWithoutAdActivity extends AppCompatActivity {
                         String name = dataSnapshot.child("name").getValue().toString();
                         String pic = dataSnapshot.child("imageurl").getValue().toString();
                         textName.setText(name);
-                        Picasso.get().load(pic).into(imageProfile);
+                        if (!pic.equals(""))
+                            Picasso.get().load(pic).into(imageProfile);
                     } catch (Exception ignored) {
                     }
                 }
@@ -95,7 +98,7 @@ public class ChatWithoutAdActivity extends AppCompatActivity {
     }
 
     private void CheckChat() {
-        dref.child("ChatList").addValueEventListener(new ValueEventListener() {
+        dref.child("ChatList").addValueEventListener(valueEventListener2 = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 try {
@@ -116,7 +119,10 @@ public class ChatWithoutAdActivity extends AppCompatActivity {
                     if (!ChatExist)
                         CreateNewChat();
                     else
+                    {
                         LoadChat(ChatID);
+                        UpdateReadReceipt();
+                    }
                 } catch (Exception ignored) {
                 }
             }
@@ -128,8 +134,29 @@ public class ChatWithoutAdActivity extends AppCompatActivity {
         });
     }
 
+    private void UpdateReadReceipt() {
+        dref.child("ChatList").child(ChatID).addValueEventListener(valueEventListener3 = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists())
+                {
+                    String LastMsgBy = snapshot.child("LastMsg").getValue().toString();
+                    if (!LastMsgBy.equals(MineID))
+                    {
+                        dref.child("ChatList").child(ChatID).child("Read").setValue("true");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     private void LoadChat(String chat_id) {
-        dref.child("Messages").child(chat_id).addValueEventListener(new ValueEventListener() {
+        dref.child("Messages").child(chat_id).addValueEventListener(valueEventListener4 = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 messageAttrs.clear();
@@ -165,14 +192,12 @@ public class ChatWithoutAdActivity extends AppCompatActivity {
 
         dref.child("ChatList").child(ChatID).child("ReceiverId").setValue(SellerID);
         dref.child("ChatList").child(ChatID).child("SenderId").setValue(MineID);
-        dref.child("ChatList").child(ChatID).child("SenderId").setValue(MineID);
     }
 
     private void CreateChat() {
         ChatID = dref.child("ChatList").push().getKey();
 
         dref.child("ChatList").child(ChatID).child("ReceiverId").setValue(SellerID);
-        dref.child("ChatList").child(ChatID).child("SenderId").setValue(MineID);
         dref.child("ChatList").child(ChatID).child("SenderId").setValue(MineID);
 
         SendMsg();
@@ -181,6 +206,9 @@ public class ChatWithoutAdActivity extends AppCompatActivity {
     private void SendMsg() {
         try {
             if (editText.getText() != null && !editText.getText().toString().trim().equals("")) {
+                dref.child("ChatList").child(ChatID).child("Read").setValue("false");
+                dref.child("ChatList").child(ChatID).child("LastMsg").setValue(MineID);
+
                 calendar = Calendar.getInstance();
                 dateFormat = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy", Locale.getDefault());
                 date = dateFormat.format(calendar.getTime());
@@ -192,7 +220,7 @@ public class ChatWithoutAdActivity extends AppCompatActivity {
 
                 DatabaseReference MsgRef = dref.child("Messages").child(ChatID);
 
-                MsgRef.orderByKey().limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
+                MsgRef.orderByKey().limitToLast(1).addListenerForSingleValueEvent(valueEventListener5 = new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String MsgID = "1";
@@ -224,5 +252,80 @@ public class ChatWithoutAdActivity extends AppCompatActivity {
             }
         } catch (Exception ignored) {
         }
+    }
+
+    @Override
+    protected void onStop() {
+        if (valueEventListener1 !=null)
+        {
+            dref.removeEventListener(valueEventListener1);
+        }
+        if (valueEventListener2 !=null)
+        {
+            dref.removeEventListener(valueEventListener2);
+        }
+        if (valueEventListener3 !=null)
+        {
+            dref.removeEventListener(valueEventListener3);
+        }
+        if (valueEventListener4 !=null)
+        {
+            dref.removeEventListener(valueEventListener4);
+        }
+        if (valueEventListener5 !=null)
+        {
+            dref.removeEventListener(valueEventListener5);
+        }
+        super.onStop();
+    }
+
+    @Override
+    protected void onPause() {
+        if (valueEventListener1 !=null)
+        {
+            dref.removeEventListener(valueEventListener1);
+        }
+        if (valueEventListener2 !=null)
+        {
+            dref.removeEventListener(valueEventListener2);
+        }
+        if (valueEventListener3 !=null)
+        {
+            dref.removeEventListener(valueEventListener3);
+        }
+        if (valueEventListener4 !=null)
+        {
+            dref.removeEventListener(valueEventListener4);
+        }
+        if (valueEventListener5 !=null)
+        {
+            dref.removeEventListener(valueEventListener5);
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (valueEventListener1 !=null)
+        {
+            dref.removeEventListener(valueEventListener1);
+        }
+        if (valueEventListener2 !=null)
+        {
+            dref.removeEventListener(valueEventListener2);
+        }
+        if (valueEventListener3 !=null)
+        {
+            dref.removeEventListener(valueEventListener3);
+        }
+        if (valueEventListener4 !=null)
+        {
+            dref.removeEventListener(valueEventListener4);
+        }
+        if (valueEventListener5 !=null)
+        {
+            dref.removeEventListener(valueEventListener5);
+        }
+        super.onDestroy();
     }
 }

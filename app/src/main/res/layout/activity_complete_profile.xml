@@ -58,7 +58,6 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/profnames"
                     android:layout_width="match_parent"
-                    android:maxLength="20"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="8dp"
@@ -66,6 +65,7 @@
                     android:focusableInTouchMode="true"
                     android:hint="Enter Your Name"
                     android:inputType="textPersonName"
+                    android:maxLength="15"
                     android:textColorHint="@color/gray" />
 
             </RelativeLayout>
@@ -87,7 +87,7 @@
                     android:focusableInTouchMode="true"
                     android:hint="Enter Your Mobile Number"
                     android:inputType="phone"
-                    android:maxLength="11"
+                    android:maxLength="15"
                     android:textColorHint="@color/gray" />
 
             </RelativeLayout>
@@ -115,6 +115,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="8dp"
                     android:focusable="true"
+                    android:maxLength="15"
                     android:focusableInTouchMode="true"
                     android:hint="Enter Your Address"
                     android:inputType="text"

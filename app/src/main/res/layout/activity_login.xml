@@ -20,6 +20,7 @@
         android:layout_gravity="center"/>
 
     <EditText
+        android:maxLength="20"
         android:id="@+id/loginuname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,6 +39,7 @@
         android:textSize="18sp" />
 
     <EditText
+        android:maxLength="10"
         android:id="@+id/loginpass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -27,6 +27,7 @@
             android:textSize="34sp" />
 
         <EditText
+            android:maxLength="15"
             android:id="@+id/reguname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,7 +37,6 @@
             android:textSize="18sp"
             android:backgroundTint="@color/Green"
             android:focusable="true"
-            android:maxLength="20"
             android:focusableInTouchMode="true"
             android:layout_marginTop="35dp"
             android:layout_marginLeft="20dp"
@@ -59,6 +59,7 @@
             android:textColorHint="@color/black"
             android:backgroundTint="@color/Green"
             android:textSize="18sp"
+            android:maxLength="15"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:layout_marginTop="35dp"
@@ -73,6 +74,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:hint="Password"
+            android:maxLength="10"
             android:textColorHint="@color/black"
             android:backgroundTint="@color/Green"
             android:textSize="18sp"
@@ -99,6 +101,7 @@
             android:textColorHint="@color/black"
             android:backgroundTint="@color/Green"
             android:textSize="18sp"
+            android:maxLength="10"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:layout_marginTop="35dp"

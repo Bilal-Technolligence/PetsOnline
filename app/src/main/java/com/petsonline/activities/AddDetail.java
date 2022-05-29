@@ -108,7 +108,7 @@ public class AddDetail extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     SellerName.setText(dataSnapshot.child("name").getValue().toString());
                     if (dataSnapshot.child("imageurl").getValue().toString().trim().equals("")) {
-                        imgProfile.setImageResource(R.drawable.logo_png);
+                        imgProfile.setImageResource(R.drawable.profile);
                     } else {
                         Picasso.get().load(dataSnapshot.child("imageurl").getValue().toString()).into(imgProfile);
                     }
