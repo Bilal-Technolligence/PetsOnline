@@ -63,7 +63,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
 
         final String id = userAttrs.get(position).getId();
 
-        dref.child("ChatList").addValueEventListener(new ValueEventListener() {
+        dref.child("ChatListCareTaker").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 try {

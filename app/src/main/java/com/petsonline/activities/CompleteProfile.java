@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -34,20 +35,16 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class CompleteProfile extends AppCompatActivity {
-    EditText eName,eMobile,eEmail,eAddress,eAge;
-    private static final int pick_image = 2;
-    Button eConfirm , pback;
-//    Spinner spinner;
+    EditText eName,eMobile,eAddress,eAge,eEducation,eSpecialization;
+    Button eConfirm;
     ImageView pimage;
     private Uri filepath;
     FirebaseDatabase database;
     String name;
-    String check = "update";
     DatabaseReference ref;
     FirebaseStorage storage;
     ProgressDialog progressDialog;
     StorageReference storageReference ;
-    private FirebaseAuth mAuth;
     private String Role = "";
     String id;
     profiledata mProfile;
@@ -57,22 +54,25 @@ public class CompleteProfile extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_complete_profile );
 
-        eName=(EditText)findViewById(R.id.profnames);
-        eMobile=(EditText)findViewById(R.id.profmobile);
-        eAddress=(EditText)findViewById(R.id.profaddress);
-        eAge=(EditText)findViewById(R.id.profage);
-        eConfirm=(Button) findViewById(R.id.profCONFIRM);
+        eName= findViewById(R.id.profnames);
+        eMobile= findViewById(R.id.profmobile);
+        eAddress= findViewById(R.id.profaddress);
+        eAge= findViewById(R.id.profage);
+        eEducation = findViewById(R.id.education);
+        eSpecialization = findViewById(R.id.specialization);
+        eConfirm= findViewById(R.id.profCONFIRM);
+
+        eEducation.setVisibility(View.GONE);
+        eSpecialization.setVisibility(View.GONE);
+
         progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("Logging In..... ");
 
         Intent in = getIntent();
-        final String update = in.getStringExtra( "update" );
         name = in.getStringExtra( "name" );
 
-        pimage=(ImageView)findViewById(R.id.pimage);
+        pimage= findViewById(R.id.pimage);
         pimage.setOnClickListener(v -> {
-//                Intent intent=new Intent();
-//                intent.setType("images/*");
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(intent, 2);
         });
@@ -81,9 +81,9 @@ public class CompleteProfile extends AppCompatActivity {
         ref = database.getReference("Employee_Profile");
         storage=FirebaseStorage.getInstance();
         storageReference=storage.getReference();
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-        id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        id = mAuth.getCurrentUser().getUid();
 
         database.getReference("Users").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -93,6 +93,11 @@ public class CompleteProfile extends AppCompatActivity {
                     if (snapshot.child("Role").exists())
                     {
                         Role = snapshot.child("Role").getValue(String.class);
+                        if (Role.equals("Doctor"))
+                        {
+                            eEducation.setVisibility(View.VISIBLE);
+                            eSpecialization.setVisibility(View.VISIBLE);
+                        }
                     }
                 }
             }
@@ -127,6 +132,11 @@ public class CompleteProfile extends AppCompatActivity {
                                 mProfile.setAge(eAge.getText().toString());
                                 mProfile.setPROFILECOMPLETED("true");
                                 mProfile.setROLE(Role);
+                                if (Role.equals("Doctor"))
+                                {
+                                    mProfile.setEDUCATION(eEducation.getText().toString());
+                                    mProfile.setSPECIALIZATION(eSpecialization.getText().toString());
+                                }
 
                                 new BaseUtil(CompleteProfile.this).SetLoggedIn(true);
 
@@ -145,6 +155,11 @@ public class CompleteProfile extends AppCompatActivity {
                     mProfile.setAge(eAge.getText().toString());
                     mProfile.setPROFILECOMPLETED("true");
                     mProfile.setROLE(Role);
+                    if (Role.equals("Doctor"))
+                    {
+                        mProfile.setEDUCATION(eEducation.getText().toString());
+                        mProfile.setSPECIALIZATION(eSpecialization.getText().toString());
+                    }
 
                     new BaseUtil(CompleteProfile.this).SetLoggedIn(true);
 
@@ -210,16 +225,12 @@ public class CompleteProfile extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        /*Intent in = new Intent( CompleteProfile.this, MainActivity.class );
-        in.putExtra( "name", String.valueOf( name ) );
-        startActivity(in);
-        finish();*/
     }
 
     void SaveProfile(profiledata profiledata){
         ref.child(id).setValue(profiledata);
         progressDialog.dismiss();
-        Toast.makeText(CompleteProfile.this,"profile successfully saved..",Toast.LENGTH_LONG).show();
+        Toast.makeText(CompleteProfile.this,"profile successfully saved.",Toast.LENGTH_LONG).show();
 
         FirebaseDatabase.getInstance().getReference().child("Users")
                 .child(id).addListenerForSingleValueEvent(new ValueEventListener() {

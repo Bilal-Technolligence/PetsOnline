@@ -1,6 +1,7 @@
 package com.petsonline.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.petsonline.R;
+import com.petsonline.activities.CareTakerDetailActivity;
 import com.petsonline.models.CareTaker;
 import com.squareup.picasso.Picasso;
 
@@ -69,7 +71,9 @@ public class CareTakerListAdaptor extends RecyclerView.Adapter<CareTakerListAdap
         else
             holder.image.setImageResource(R.drawable.profile);
 
-        //holder.cld.setOnClickListener(view -> ct.startActivity(new Intent(ct, AddDetail.class).putExtra("Ad", p1)));
+        holder.cld.setOnClickListener(view -> {
+            ct.startActivity(new Intent(ct, CareTakerDetailActivity.class).putExtra("Caretaker", p1));
+        });
     }
 
     @Override

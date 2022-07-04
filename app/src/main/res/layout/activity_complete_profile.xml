@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:context="com.petsonline.activities.CompleteProfile">
@@ -25,15 +25,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                >
+                android:layout_marginTop="20dp">
 
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/pimage"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
                     android:src="@drawable/upload"
                     app:civ_border_color="#FFF"
                     app:civ_border_width="2dp" />
@@ -59,10 +57,9 @@
                     android:id="@+id/profnames"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="8dp"
                     android:focusable="true"
-                    android:focusableInTouchMode="true"
                     android:hint="Enter Your Name"
                     android:inputType="textPersonName"
                     android:maxLength="15"
@@ -81,13 +78,12 @@
                     android:id="@+id/profmobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="8dp"
                     android:focusable="true"
-                    android:focusableInTouchMode="true"
                     android:hint="Enter Your Mobile Number"
                     android:inputType="phone"
-                    android:maxLength="15"
+                    android:maxLength="11"
                     android:textColorHint="@color/gray" />
 
             </RelativeLayout>
@@ -112,13 +108,12 @@
                     android:id="@+id/profaddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="8dp"
                     android:focusable="true"
-                    android:maxLength="15"
-                    android:focusableInTouchMode="true"
                     android:hint="Enter Your Address"
                     android:inputType="text"
+                    android:maxLength="30"
                     android:textColorHint="@color/gray" />
 
             </RelativeLayout>
@@ -126,23 +121,18 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-
-                >
-
+                android:layout_marginTop="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/profage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="8dp"
                     android:focusable="true"
-                    android:focusableInTouchMode="true"
                     android:hint="Enter Your Age"
                     android:inputType="number"
                     android:maxLength="2"
-
                     android:textColorHint="@color/gray" />
 
             </RelativeLayout>
@@ -150,10 +140,33 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="10dp">
 
-                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/specialization"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:hint="Enter Your Specialization"
+                    android:textColorHint="@color/gray" />
 
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/education"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+                    android:hint="Enter Your Education"
+                    android:textColorHint="@color/gray" />
 
             </RelativeLayout>
 
@@ -169,7 +182,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="100dp"
-                    android:layout_marginLeft="10dp"
                     android:background="@color/Green"
                     android:text="CONFIRM"
                     android:textColor="@color/white"

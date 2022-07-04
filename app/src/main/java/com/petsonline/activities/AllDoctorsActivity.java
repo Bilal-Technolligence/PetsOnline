@@ -1,12 +1,12 @@
 package com.petsonline.activities;
 
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -15,9 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.petsonline.R;
-import com.petsonline.adapters.CareTakerListAdaptor;
 import com.petsonline.adapters.DoctorListAdaptor;
-import com.petsonline.models.CareTaker;
 import com.petsonline.models.Doctor;
 
 import java.util.ArrayList;
@@ -63,32 +61,35 @@ public class AllDoctorsActivity extends AppCompatActivity {
                             p.setIMAGEURL(eachAdRecord.child("imageurl").getValue(String.class));
                             p.setADDRESS(eachAdRecord.child("address").getValue(String.class));
                             p.setMOBILE(eachAdRecord.child("mobile").getValue(String.class));
-                            p.setEMAIL(eachAdRecord.child("email").getValue(String.class));
+                            if (eachAdRecord.child("email").exists())
+                                p.setEMAIL(eachAdRecord.child("email").getValue(String.class));
+                            if (eachAdRecord.child("education").exists())
+                                p.setEDUCATION(eachAdRecord.child("education").getValue(String.class));
+                            if (eachAdRecord.child("specialization").exists())
+                                p.setSPECIALIZATION(eachAdRecord.child("specialization").getValue(String.class));
 
                             al.add(p);
+                        }
                     }
-                }
-                if (!al.isEmpty()) {
-                    NoRecordFoundView.setVisibility(View.GONE);
-                    rv.setVisibility(View.VISIBLE);
-                    md = new DoctorListAdaptor(AllDoctorsActivity.this, al);
-                    rv.setAdapter(md);
+                    if (!al.isEmpty()) {
+                        NoRecordFoundView.setVisibility(View.GONE);
+                        rv.setVisibility(View.VISIBLE);
+                        md = new DoctorListAdaptor(AllDoctorsActivity.this, al);
+                        rv.setAdapter(md);
+                    } else {
+                        NoRecordFoundView.setVisibility(View.VISIBLE);
+                        rv.setVisibility(View.GONE);
+                    }
                 } else {
                     NoRecordFoundView.setVisibility(View.VISIBLE);
                     rv.setVisibility(View.GONE);
                 }
-            } else
-
-            {
-                NoRecordFoundView.setVisibility(View.VISIBLE);
-                rv.setVisibility(View.GONE);
             }
-        }
 
-        @Override
-        public void onCancelled (@NonNull DatabaseError databaseError){
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-        }
-    });
-}
+            }
+        });
+    }
 }

@@ -10,7 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
@@ -126,6 +128,17 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 break;
             }*/
 
+            case R.id.my_pets:
+                Intent in = new Intent(this, MyPetsActivity.class);
+                startActivity(in);
+
+                break;
+
+            /*case R.id.talk_to_doctor:
+                Intent i = new Intent(this, MyPetsActivity.class);
+                startActivity(i);
+
+                break;*/
             case R.id.logout: {
 
                 if (uid != null) {
@@ -143,9 +156,18 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        Intent in = new Intent(BaseActivity.this, MainActivity.class);
+        //super.onBackPressed();
+        /*Intent in = new Intent(BaseActivity.this, MainActivity.class);
         startActivity(in);
-        finish();
+        finish();*/
+        if (drawerLayout.isDrawerOpen(GravityCompat.START))
+            drawerLayout.closeDrawer(GravityCompat.START);
+        else
+        {
+            final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(BaseActivity.this);
+            alertDialogBuilder.setTitle("Exit").setMessage("Are you sure to exit?")
+                    .setNegativeButton("No", (dialog, which) -> dialog.cancel()).setPositiveButton("Exit", (dialog, which) -> finish()).show();
+
+        }
     }
 }

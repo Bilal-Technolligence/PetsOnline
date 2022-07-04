@@ -43,12 +43,6 @@
             android:layout_marginRight="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginStart="20dp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_height="wrap_content"
-            android:text="UserName must be without any space"/>
 
         <EditText
             android:id="@+id/regmail"
@@ -59,7 +53,6 @@
             android:textColorHint="@color/black"
             android:backgroundTint="@color/Green"
             android:textSize="18sp"
-            android:maxLength="15"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:layout_marginTop="35dp"
@@ -90,7 +83,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_height="wrap_content"
-            android:text="Password must contain 6 numbers"/>
+            android:text="Password must contain at least 6 numbers"/>
 
         <EditText
             android:id="@+id/regconcpass"

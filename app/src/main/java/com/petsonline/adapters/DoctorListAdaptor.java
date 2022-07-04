@@ -1,6 +1,7 @@
 package com.petsonline.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.petsonline.R;
+import com.petsonline.activities.DoctorDetail;
 import com.petsonline.models.CareTaker;
 import com.petsonline.models.Doctor;
 import com.squareup.picasso.Picasso;
@@ -50,12 +52,22 @@ public class DoctorListAdaptor extends RecyclerView.Adapter<DoctorListAdaptor.My
         else
             holder.address.setVisibility(View.GONE);
 
+        if (p1.getEDUCATION()!=null && !p1.getEDUCATION().equals(""))
+            holder.chargesperday.setText("Education : " + p1.getEDUCATION());
+        else
+            holder.chargesperday.setVisibility(View.GONE);
+
+        if (p1.getSPECIALIZATION()!=null && !p1.getSPECIALIZATION().equals(""))
+            holder.chargesperhour.setText("Specialization : " + p1.getSPECIALIZATION());
+        else
+            holder.chargesperhour.setVisibility(View.GONE);
+
         if (p1.getIMAGEURL() != null && !p1.getIMAGEURL().equals(""))
             Picasso.get().load(p1.getIMAGEURL()).into(holder.image);
         else
             holder.image.setImageResource(R.drawable.profile);
 
-        //holder.cld.setOnClickListener(view -> ct.startActivity(new Intent(ct, AddDetail.class).putExtra("Ad", p1)));
+        holder.cld.setOnClickListener(view -> ct.startActivity(new Intent(ct, DoctorDetail.class).putExtra("doctor", p1)));
     }
 
     @Override
@@ -78,6 +90,7 @@ public class DoctorListAdaptor extends RecyclerView.Adapter<DoctorListAdaptor.My
             image = itemView.findViewById(R.id.image);
             name = itemView.findViewById(R.id.mName);
             opening_hours = itemView.findViewById(R.id.opening_hours);
+            opening_hours.setVisibility(View.GONE);
             chargesperday = itemView.findViewById(R.id.chargesperday);
             chargesperhour = itemView.findViewById(R.id.chargesperhour);
             address = itemView.findViewById(R.id.address);

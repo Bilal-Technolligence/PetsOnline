@@ -13,10 +13,12 @@ public class Doctor implements Serializable {
     public String PROFILECOMPLETED;
     public String ROLE;
     public String EMAIL;
+    private String EDUCATION;
+    private String SPECIALIZATION;
 
     public Doctor(){}
 
-    public Doctor(String ID, String NAME, String MOBILE, String ADDRESS, String DOB, String age, String IMAGEURL, String PROFILECOMPLETED, String ROLE, String EMAIL) {
+    public Doctor(String ID, String NAME, String MOBILE, String ADDRESS, String DOB, String age, String IMAGEURL, String PROFILECOMPLETED, String ROLE, String EMAIL, String EDUCATION, String SPECIALIZATION) {
         this.ID = ID;
         this.NAME = NAME;
         this.MOBILE = MOBILE;
@@ -27,6 +29,24 @@ public class Doctor implements Serializable {
         this.PROFILECOMPLETED = PROFILECOMPLETED;
         this.ROLE = ROLE;
         this.EMAIL = EMAIL;
+        this.EDUCATION = EDUCATION;
+        this.SPECIALIZATION = SPECIALIZATION;
+    }
+
+    public String getEDUCATION() {
+        return EDUCATION;
+    }
+
+    public void setEDUCATION(String EDUCATION) {
+        this.EDUCATION = EDUCATION;
+    }
+
+    public String getSPECIALIZATION() {
+        return SPECIALIZATION;
+    }
+
+    public void setSPECIALIZATION(String SPECIALIZATION) {
+        this.SPECIALIZATION = SPECIALIZATION;
     }
 
     public String getID() {

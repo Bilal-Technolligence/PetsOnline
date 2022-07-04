@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -18,7 +18,46 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PetsOnline" >
+        android:theme="@style/Theme.PetsOnline">
+        <activity
+            android:name=".activities.DoctorMeProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ChatWithDoctorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.DoctorDetail"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ChatListDoctor"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ChatWithUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ChatListCareTaker"
+            android:exported="false" />
+        <activity
+            android:name=".activities.PetDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.MyPetsHandOverActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ChatWithCareTakerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.CareTakerDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AddNewPetActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.OwnPetDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.MyPetsActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.DetailPictureActivity"
             android:exported="false" />
@@ -70,7 +109,7 @@
         <activity
             android:name=".activities.SplashScreen"
             android:exported="true"
-            android:theme="@style/AppMaterialTheme" >
+            android:theme="@style/AppMaterialTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

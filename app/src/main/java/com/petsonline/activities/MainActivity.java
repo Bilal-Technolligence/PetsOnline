@@ -1,6 +1,7 @@
 package com.petsonline.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,30 +31,31 @@ import com.google.firebase.database.ValueEventListener;
 import com.petsonline.R;
 import com.petsonline.adapters.TrendingRecyclerViewAdapter;
 import com.petsonline.models.AdDetail;
-
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 
 public class MainActivity extends BaseActivity implements TrendingRecyclerViewAdapter.ItemClickListener {
-    private RecyclerView trendingRecyclerView;
     private TrendingRecyclerViewAdapter trendingRecyclerViewAdapter;
     private DatabaseReference databaseReference;
     private BottomNavigationView bottomNavigationView;
     private View no_Trending_ads_layout;
     private FloatingActionButton add_new_ad_btn;
-    private TextView viewAllCategory, gotoCareTaker, gotoDoctors;
+    TextView viewAllCategory, gotoCareTaker, gotoDoctors;
     private ArrayList<AdDetail> currentList;
-
-   private LinearLayout cats, dogs, hens, rabbits, goats, parrots;
-   private LinearLayout.LayoutParams params;
-   private LinearLayout next, prev;
-   private int viewWidth;
-   private GestureDetector gestureDetector = null;
-   private HorizontalScrollView horizontalScrollView;
-   private ArrayList<LinearLayout> layouts;
-   private int mWidth;
-   private int currPosition;
+    private SliderView sliderView;
+    LinearLayout cats, dogs, hens, rabbits, goats, parrots;
+    LinearLayout.LayoutParams params;
+    LinearLayout next, prev;
+    private int viewWidth;
+    private GestureDetector gestureDetector = null;
+    private HorizontalScrollView horizontalScrollView;
+    private ArrayList<LinearLayout> layouts;
+    int mWidth;
+    int currPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,25 +65,40 @@ public class MainActivity extends BaseActivity implements TrendingRecyclerViewAd
         currentList = new ArrayList<>();
 
         initObj();
-        getTrending();
         clickListeners();
         mHorizontalScrollView();
+        startSlider();
+    }
+
+    private void startSlider() {
+        trendingRecyclerViewAdapter = new TrendingRecyclerViewAdapter(MainActivity.this, MainActivity.this, currentList);
+        sliderView.setSliderAdapter(trendingRecyclerViewAdapter);
+        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
+        sliderView.setSliderTransformAnimation(SliderAnimations.CUBEINDEPTHTRANSFORMATION); //set animation for slider
+        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_RIGHT); //set rotation type for slider
+        sliderView.setIndicatorSelectedColor(Color.WHITE); //set indicator selected color
+        sliderView.setIndicatorUnselectedColor(Color.GRAY); //set indicator Unselected color
+        sliderView.setScrollTimeInSec(3); //set slide time
+        sliderView.setAutoCycle(true);
+        sliderView.startAutoCycle();
+
+        getTrending();
     }
 
     private void mHorizontalScrollView() {
-        prev = (LinearLayout) findViewById(R.id.prev);
-        next = (LinearLayout) findViewById(R.id.next);
-        horizontalScrollView = (HorizontalScrollView) findViewById(R.id.hsv);
+        prev = findViewById(R.id.prev);
+        next = findViewById(R.id.next);
+        horizontalScrollView = findViewById(R.id.hsv);
         gestureDetector = new GestureDetector(new MyGestureDetector());
-        cats = (LinearLayout) findViewById(R.id.CatsCategory);
-        dogs = (LinearLayout) findViewById(R.id.DogsCategory);
-        parrots = (LinearLayout) findViewById(R.id.ParrotsCategory);
-        goats = (LinearLayout) findViewById(R.id.GoatsCategory);
-        rabbits = (LinearLayout) findViewById(R.id.RabbitsCategory);
-        hens = (LinearLayout) findViewById(R.id.HensCategory);
+        cats = findViewById(R.id.CatsCategory);
+        dogs = findViewById(R.id.DogsCategory);
+        parrots = findViewById(R.id.ParrotsCategory);
+        goats = findViewById(R.id.GoatsCategory);
+        rabbits = findViewById(R.id.RabbitsCategory);
+        hens = findViewById(R.id.HensCategory);
 
         Display display = getWindowManager().getDefaultDisplay();
-        mWidth = display.getWidth(); // deprecated
+        mWidth = display.getWidth();
         viewWidth = mWidth / 3;
         layouts = new ArrayList<>();
         params = new LinearLayout.LayoutParams(viewWidth, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -118,43 +136,43 @@ public class MainActivity extends BaseActivity implements TrendingRecyclerViewAd
 
         cats.setOnClickListener(view -> {
             Intent i = new Intent(MainActivity.this, SpecificAdsActivity.class);
-            i.putExtra("category","cats");
-            i.putExtra("subcategory",1);
+            i.putExtra("category", "cats");
+            i.putExtra("subcategory", 1);
             startActivity(i);
         });
 
         dogs.setOnClickListener(view -> {
             Intent i = new Intent(MainActivity.this, SpecificAdsActivity.class);
-            i.putExtra("category","dogs");
-            i.putExtra("subcategory",2);
+            i.putExtra("category", "dogs");
+            i.putExtra("subcategory", 2);
             startActivity(i);
         });
 
         hens.setOnClickListener(view -> {
             Intent i = new Intent(MainActivity.this, SpecificAdsActivity.class);
-            i.putExtra("category","hens");
-            i.putExtra("subcategory",3);
+            i.putExtra("category", "hens");
+            i.putExtra("subcategory", 3);
             startActivity(i);
         });
 
         rabbits.setOnClickListener(view -> {
             Intent i = new Intent(MainActivity.this, SpecificAdsActivity.class);
-            i.putExtra("category","rabbits");
-            i.putExtra("subcategory",4);
+            i.putExtra("category", "rabbits");
+            i.putExtra("subcategory", 4);
             startActivity(i);
         });
 
         goats.setOnClickListener(view -> {
             Intent i = new Intent(MainActivity.this, SpecificAdsActivity.class);
-            i.putExtra("category","goats");
-            i.putExtra("subcategory",5);
+            i.putExtra("category", "goats");
+            i.putExtra("subcategory", 5);
             startActivity(i);
         });
 
         parrots.setOnClickListener(view -> {
             Intent i = new Intent(MainActivity.this, SpecificAdsActivity.class);
-            i.putExtra("category","parrots");
-            i.putExtra("subcategory",6);
+            i.putExtra("category", "parrots");
+            i.putExtra("subcategory", 6);
             startActivity(i);
         });
     }
@@ -163,7 +181,7 @@ public class MainActivity extends BaseActivity implements TrendingRecyclerViewAd
         viewAllCategory = findViewById(R.id.viewAllCategory);
         gotoCareTaker = findViewById(R.id.gotoCareTaker);
         gotoDoctors = findViewById(R.id.gotoDoctors);
-
+        sliderView = findViewById(R.id.imageSlider);
         viewAllCategory.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, AllCategoriesActivity.class)));
         gotoCareTaker.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, AllCareTakersActivity.class)));
         gotoDoctors.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, AllDoctorsActivity.class)));
@@ -190,12 +208,7 @@ public class MainActivity extends BaseActivity implements TrendingRecyclerViewAd
             return true;
         });
 
-        trendingRecyclerView = findViewById(R.id.trendingRecyclerView);
-
         databaseReference = FirebaseDatabase.getInstance().getReference();
-
-        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
-        trendingRecyclerView.setLayoutManager(horizontalLayoutManager);
     }
 
     private void getTrending() {
@@ -207,7 +220,7 @@ public class MainActivity extends BaseActivity implements TrendingRecyclerViewAd
                 if (snapshot.exists()) {
                     for (DataSnapshot eachAdRecord : snapshot.getChildren()) {
                         AdDetail ad = new AdDetail();
-                        if (eachAdRecord.child("Sold").exists() && !eachAdRecord.child("Sold").getValue(String.class).equals("0")) {
+                        if (eachAdRecord.child("Sold").exists() && !Objects.requireNonNull(eachAdRecord.child("Sold").getValue(String.class)).equals("0")) {
                             ad.setAd_Sold(eachAdRecord.child("Sold").getValue(String.class));
                             ad.setAd_ID(eachAdRecord.getKey());
                             ad.setAd_Title(eachAdRecord.child("Title").getValue(String.class));
@@ -251,9 +264,7 @@ public class MainActivity extends BaseActivity implements TrendingRecyclerViewAd
 
                     if (!currentList.isEmpty()) {
                         ShowTrending();
-                        trendingRecyclerViewAdapter = new TrendingRecyclerViewAdapter(MainActivity.this, MainActivity.this, currentList);
-                        trendingRecyclerViewAdapter.setClickListener(MainActivity.this);
-                        trendingRecyclerView.setAdapter(trendingRecyclerViewAdapter);
+                        trendingRecyclerViewAdapter.renewItems(currentList);
                     } else {
                         HideTrending();
                     }
@@ -278,12 +289,12 @@ public class MainActivity extends BaseActivity implements TrendingRecyclerViewAd
 
     private void ShowTrending() {
         no_Trending_ads_layout.setVisibility(View.GONE);
-        trendingRecyclerView.setVisibility(View.VISIBLE);
+        sliderView.setVisibility(View.VISIBLE);
     }
 
     private void HideTrending() {
         no_Trending_ads_layout.setVisibility(View.VISIBLE);
-        trendingRecyclerView.setVisibility(View.GONE);
+        sliderView.setVisibility(View.GONE);
     }
 
     @Override
@@ -303,13 +314,6 @@ public class MainActivity extends BaseActivity implements TrendingRecyclerViewAd
     }
 
     @Override
-    public void onBackPressed() {
-        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
-        alertDialogBuilder.setTitle("Exit").setMessage("Are you sure to exit?")
-                .setNegativeButton("No", (dialog, which) -> dialog.cancel()).setPositiveButton("Exit", (dialog, which) -> finish()).show();
-    }
-
-    @Override
     public void onItemClick(View view, int position) {
         if (position >= 0) {
             Intent o = new Intent(MainActivity.this, AddDetail.class);
@@ -322,7 +326,7 @@ public class MainActivity extends BaseActivity implements TrendingRecyclerViewAd
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
                                float velocityY) {
-            if (e1!=null && e2!=null && e1.getX() < e2.getX()) {
+            if (e1 != null && e2 != null && e1.getX() < e2.getX()) {
                 currPosition = getVisibleViews("left");
             } else {
                 currPosition = getVisibleViews("right");

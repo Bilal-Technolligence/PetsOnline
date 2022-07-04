@@ -12,6 +12,16 @@
 -->
 
     <item
+        android:id="@+id/my_pets"
+        android:icon="@drawable/ic_pets"
+        android:title="My Pets"/>
+
+    <!--<item
+        android:id="@+id/talk_to_doctor"
+        android:icon="@drawable/ic_baseline_perm_identity_24"
+        android:title="Talk with Doctor" />-->
+
+    <item
         android:id="@+id/logout"
         android:icon="@drawable/ic_logout"
         android:title="Logout"/>

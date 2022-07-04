@@ -1,4 +1,4 @@
-package com.example;
+package com.petsonline;
 
 import org.testng.annotations.Test;
 

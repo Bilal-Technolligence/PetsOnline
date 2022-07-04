@@ -24,4 +24,9 @@
     <color name="home">#4C0404</color>
     <color name="grey">#808080</color>
     <color name="light_grey">#F1F1F1</color>
+    <color name="background">#5BA0CF</color>
+    <color name="color_image_pdf">#5AC5CA</color>
+    <color name="color_text_pdf">#F27D59</color>
+    <color name="color_excel_pdf">#6298EC</color>
+
 </resources>

@@ -43,64 +43,68 @@ public class SplashScreen extends AppCompatActivity {
                         .child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String Role = dataSnapshot.child("Role").getValue(String.class);
-                        FirebaseDatabase.getInstance().getReference("Employee_Profile").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                Loading.setVisibility(View.GONE);
-                                if (snapshot.exists())
-                                {
-                                    boolean status = snapshot.child("profilecompleted").exists();
-                                    boolean status2 = false;
-                                    if (status)
-                                        status2 = snapshot.child("profilecompleted").getValue(String.class).equals("true");
-
-                                    if (! status|| !status2)
+                        if(dataSnapshot.exists())
+                        {
+                            String Role = dataSnapshot.child("Role").getValue(String.class);
+                            FirebaseDatabase.getInstance().getReference("Employee_Profile").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    Loading.setVisibility(View.GONE);
+                                    if (snapshot.exists())
                                     {
-                                        startActivity(new Intent(SplashScreen.this, CompleteProfile.class));
+                                        boolean status = snapshot.child("profilecompleted").exists();
+                                        boolean status2 = false;
+                                        if (status)
+                                            status2 = snapshot.child("profilecompleted").getValue(String.class).equals("true");
+
+                                        if (!status|| !status2)
+                                        {
+                                            startActivity(new Intent(SplashScreen.this, CompleteProfile.class));
+                                            finish();
+                                            return;
+                                        }
+
+                                        new BaseUtil(SplashScreen.this).SetLoggedIn(true);
+                                        new BaseUtil(SplashScreen.this).SetLoginRole(Role);
+
+                                        switch (Role) {
+                                            case "Buyer/Seller":
+                                                startActivity(new Intent(SplashScreen.this, MainActivity.class));
+                                                break;
+                                            case "Care Taker":
+                                                startActivity(new Intent(SplashScreen.this, CareTakerActivity.class));
+                                                break;
+                                            case "Doctor":
+                                                startActivity(new Intent(SplashScreen.this, DoctorActivity.class));
+                                                break;
+                                            default:
+                                                startActivity(new Intent(SplashScreen.this, LoginActivity.class));
+                                                break;
+                                        }
                                         finish();
-                                        return;
+                                    }else
+                                    {
+                                        startActivity(new Intent(SplashScreen.this, LoginActivity.class));
+                                        finish();
                                     }
-
-                                    new BaseUtil(SplashScreen.this).SetLoggedIn(true);
-                                    new BaseUtil(SplashScreen.this).SetLoginRole(Role);
-
-                                    switch (Role) {
-                                        case "Buyer/Seller":
-                                            startActivity(new Intent(SplashScreen.this, MainActivity.class));
-                                            break;
-                                        case "Care Taker":
-                                            startActivity(new Intent(SplashScreen.this, CareTakerActivity.class));
-                                            break;
-                                        case "Doctor":
-                                            startActivity(new Intent(SplashScreen.this, DoctorActivity.class));
-                                            break;
-                                        default:
-                                            startActivity(new Intent(SplashScreen.this, LoginActivity.class));
-                                            break;
-                                    }
-                                    finish();
-                                }else
-                                {
-                                    startActivity(new Intent(SplashScreen.this, CompleteProfile.class));
-                                    finish();
                                 }
-                            }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
 
-                            }
-                        });
+                                }
+                            });
+                        }
+                        else {
+                            startActivity(new Intent(SplashScreen.this, LoginActivity.class));
+                            finish();
+                        }
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
                 });
-                //startActivity(new Intent(LoginActivity.this,MainActivity.class));
-                //finish();
-                //return;
             }
             else{
                 Loading.setVisibility(View.GONE);

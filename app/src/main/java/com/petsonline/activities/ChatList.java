@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -25,7 +26,7 @@ import java.util.Set;
 public class ChatList extends AppCompatActivity {
     RecyclerView recyclerView;
     DatabaseReference dref = FirebaseDatabase.getInstance().getReference();
-
+    View NoRecordFoundView;
     ArrayList<String> chaterId=new ArrayList<>();
     ArrayList<UserAttr> userAttrs=new ArrayList<>();
     String userId;
@@ -34,6 +35,9 @@ public class ChatList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_list);
+
+        NoRecordFoundView = findViewById(R.id.noRcdFnd);
+        NoRecordFoundView.setVisibility(View.GONE);
 
         getSupportActionBar().setTitle("Chat List");
         recyclerView=(RecyclerView) findViewById(R.id.recyclerView);
@@ -58,7 +62,13 @@ public class ChatList extends AppCompatActivity {
                                 }
                             }
                         }
-                        showChatList();
+                        if(chaterId.size() == 0)
+                        {
+                            NoRecordFoundView.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.GONE);
+                        }
+                        else
+                            showChatList();
                     }catch (Exception e){
 
                     }
@@ -122,5 +132,4 @@ public class ChatList extends AppCompatActivity {
             });
         }
     }
-
 }

@@ -3,6 +3,7 @@ package com.petsonline.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,23 +13,27 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.petsonline.R;
 import com.petsonline.activities.AddDetail;
 import com.petsonline.activities.OwnAdDetailActivity;
 import com.petsonline.models.AdDetail;
+import com.smarteist.autoimageslider.SliderViewAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class TrendingRecyclerViewAdapter extends RecyclerView.Adapter<TrendingRecyclerViewAdapter.ViewHolder>{
+public class TrendingRecyclerViewAdapter extends SliderViewAdapter<TrendingRecyclerViewAdapter.ViewHolder> {
+    private final Context context;
     ItemClickListener mClickListener;
     List<AdDetail> AdsList;
-    Context context;
 
     public TrendingRecyclerViewAdapter(Context c, ItemClickListener mClickListener, List<AdDetail> ads) {
         this.mClickListener = mClickListener;
@@ -36,15 +41,30 @@ public class TrendingRecyclerViewAdapter extends RecyclerView.Adapter<TrendingRe
         context = c;
     }
 
-    @NonNull
+    public void renewItems(List<AdDetail> sliderItems) {
+        this.AdsList = sliderItems;
+        notifyDataSetChanged();
+    }
+
+    public void deleteItem(int position) {
+        this.AdsList.remove(position);
+        notifyDataSetChanged();
+    }
+
+    public void addItem(AdDetail sliderItem) {
+        this.AdsList.add(sliderItem);
+        notifyDataSetChanged();
+    }
+
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TrendingRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent) {
+        @SuppressLint("InflateParams")
         View rowView = LayoutInflater.from(parent.getContext()).inflate(R.layout.trending_recyclerview_item,parent,false);
         return new ViewHolder(rowView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         final AdDetail p1 = AdsList.get(position);
 
         holder.Price.setText("Price : " + p1.getAd_Price());
@@ -76,14 +96,14 @@ public class TrendingRecyclerViewAdapter extends RecyclerView.Adapter<TrendingRe
     }
 
     @Override
-    public int getItemCount() {
+    public int getCount() {
         if (AdsList == null)
             return 0;
         return AdsList.size();
     }
 
     // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends SliderViewAdapter.ViewHolder implements View.OnClickListener {
         ImageView Image;
         TextView Price;
         TextView Title;
@@ -91,7 +111,7 @@ public class TrendingRecyclerViewAdapter extends RecyclerView.Adapter<TrendingRe
         TextView Category;
         TextView Address;
         TextView Date;
-        CardView cld;
+        View cld;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -109,7 +129,7 @@ public class TrendingRecyclerViewAdapter extends RecyclerView.Adapter<TrendingRe
         @Override
         public void onClick(View view) {
             if (mClickListener != null)
-                mClickListener.onItemClick(view, getAdapterPosition());
+                mClickListener.onItemClick(view, getItemPosition(view));
         }
     }
 

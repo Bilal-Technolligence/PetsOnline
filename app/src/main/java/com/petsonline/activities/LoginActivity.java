@@ -1,7 +1,6 @@
 package com.petsonline.activities;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
@@ -11,12 +10,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -26,17 +22,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.petsonline.R;
 import com.petsonline.services.FirbaseAuthenticationClass;
-import com.petsonline.util.BaseUtil;
 
 public class LoginActivity extends AppCompatActivity {
     View login;
-    TextView signup,mRecoverPasswordtv;
+    TextView signup;
     EditText emailValidate, password;
     ProgressDialog pd;
     String name,UserEmail,UserPassword,userId;
     ProgressDialog progressDialog;
-    private FirebaseAuth mAuth;
-
+    FirebaseAuth mAuth;
     DatabaseReference dref= FirebaseDatabase.getInstance().getReference();
 
     @Override
@@ -44,9 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_login);
-
-        //getSupportActionBar().setTitle("LogIn");
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         pd=new ProgressDialog(this);
         pd.setMessage("Logging In..... ");
@@ -57,17 +48,8 @@ public class LoginActivity extends AppCompatActivity {
         Intent in =getIntent();
         name = in.getStringExtra( "name" );
 
-        emailValidate = (EditText)findViewById(R.id.loginuname);
-        password = (EditText) findViewById(R.id.loginpass);
-
-       // mRecoverPasswordtv = (TextView) findViewById(R.id.recoverpasswordtv);
-        //recover password TextviewCLICK
-//        mRecoverPasswordtv.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showRecoverPasswordDialog();
-//            }
-//        });
+        emailValidate = findViewById(R.id.loginuname);
+        password = findViewById(R.id.loginpass);
 
         login.setOnClickListener(v -> {
             String EMAIL = emailValidate.getText().toString().trim();
@@ -85,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        signup= (TextView) findViewById(R.id.notreg);
+        signup= findViewById(R.id.notreg);
         signup.setOnClickListener(view -> {
             Intent i= new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(i);
@@ -142,27 +124,19 @@ public class LoginActivity extends AppCompatActivity {
         emailET.setHint("Email");
         emailET.setInputType( InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         emailET.setMinEms(16);
-
-
-
         linearLayout.addView(emailET);
         linearLayout.setPadding(10,10,10,10);
         builder.setView(linearLayout);
         //button recover
-        builder.setPositiveButton("Recover", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String email=emailET.getText().toString().trim();
-                beginRecovery(email);
-            }
+        builder.setPositiveButton("Recover", (dialog, which) -> {
+            String email=emailET.getText().toString().trim();
+            beginRecovery(email);
         });
-//button cancel
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
         builder.create().show();
     }
 
     private void beginRecovery(String email) {
-
         pd.setMessage("Sending Email....");
         pd.show();
         mAuth = FirebaseAuth.getInstance(  );
@@ -175,13 +149,9 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Failed", Toast.LENGTH_SHORT).show();
 
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                pd.dismiss();
-                Toast.makeText(LoginActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
+        }).addOnFailureListener(e -> {
+            pd.dismiss();
+            Toast.makeText(LoginActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
         });
-
     }
 }

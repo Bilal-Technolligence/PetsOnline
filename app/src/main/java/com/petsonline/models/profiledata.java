@@ -11,6 +11,8 @@ public class profiledata {
     private String IMAGEURL;
     private String PROFILECOMPLETED;
     private String ROLE;
+    private String EDUCATION;
+    private String SPECIALIZATION;
 
     public String getROLE() {
         return ROLE;
@@ -26,6 +28,22 @@ public class profiledata {
 
     public void setPROFILECOMPLETED(String PROFILECOMPLETED) {
         this.PROFILECOMPLETED = PROFILECOMPLETED;
+    }
+
+    public String getEDUCATION() {
+        return EDUCATION;
+    }
+
+    public void setEDUCATION(String EDUCATION) {
+        this.EDUCATION = EDUCATION;
+    }
+
+    public String getSPECIALIZATION() {
+        return SPECIALIZATION;
+    }
+
+    public void setSPECIALIZATION(String SPECIALIZATION) {
+        this.SPECIALIZATION = SPECIALIZATION;
     }
 
     public profiledata() {

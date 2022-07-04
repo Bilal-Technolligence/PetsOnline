@@ -160,8 +160,6 @@
                 android:focusableInTouchMode="true"
                 android:hint="Enter Your Mobile Number"
                 android:inputType="number"
-                android:maxLength="2"
-
                 android:textColorHint="@color/gray" />
 
         </RelativeLayout>
@@ -170,7 +168,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
-
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email"
@@ -181,9 +178,6 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:hint="Enter Your Email"
-                android:inputType="number"
-                android:maxLength="2"
-
                 android:textColorHint="@color/gray" />
 
         </RelativeLayout>
@@ -192,6 +186,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
+            android:layout_marginBottom="60dp"
             android:orientation="horizontal">
 
             <Button
